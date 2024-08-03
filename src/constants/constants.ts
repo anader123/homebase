@@ -1,3 +1,5 @@
+export const basePaintStart = "2023-08-09T16:45:00.000Z";
+
 export const memeCoins = [
   {
     name: "Brett",
