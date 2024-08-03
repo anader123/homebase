@@ -3,6 +3,8 @@ import BasePaint from "@/components/BasePaint";
 import YellowCollective from "@/components/YellowCollective";
 import TrendingMints from "@/components/TrendingMints";
 import NetworkStats from "@/components/NetworkStats";
+import TopBounties from "@/components/TopBounties";
+import MemeCoins from "@/components/MemeCoins";
 
 export default function Home() {
   return (
@@ -10,8 +12,10 @@ export default function Home() {
       <Header />
       <NetworkStats />
       <TrendingMints />
+      <MemeCoins />
       <BasePaint />
       <YellowCollective />
+      <TopBounties />
     </main>
   );
 }

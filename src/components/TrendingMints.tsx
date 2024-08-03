@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
-import { fetchTrendingMints } from "@/utils/fetchers";
+import { apiFetcher } from "@/utils/fetchers";
 
 export default function TrendingMints() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["fetchTrendingMints"],
-    queryFn: fetchTrendingMints,
+    queryFn: () => apiFetcher("trendingmints"),
   });
 
   if (isLoading) return <div>Loading...</div>;

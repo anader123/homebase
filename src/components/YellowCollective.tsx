@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
-import { fetchYellowCollective } from "@/utils/fetchers";
+import { apiFetcher } from "@/utils/fetchers";
 import { formatUnits } from "viem";
 
 export default function YellowCollective() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["fetchYellowCollective"],
-    queryFn: fetchYellowCollective,
+    queryFn: () => apiFetcher("yellowcollective"),
   });
 
   if (isLoading) return <div>Loading...</div>;

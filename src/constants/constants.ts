@@ -4,7 +4,7 @@ export const memeCoins = [
   {
     name: "Brett",
     address: "",
-    coingeckoName: "brett-2",
+    coingeckoName: "based-brett",
     image:
       "https://assets.coingecko.com/coins/images/35529/standard/1000050750.png?1709031995",
   },
