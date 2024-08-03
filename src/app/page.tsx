@@ -5,6 +5,7 @@ import TrendingMints from "@/components/TrendingMints";
 import NetworkStats from "@/components/NetworkStats";
 import TopBounties from "@/components/TopBounties";
 import MemeCoins from "@/components/MemeCoins";
+import NftProjects from "@/components/NftProjects";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <NetworkStats />
       <TrendingMints />
       <MemeCoins />
+      <NftProjects />
       <BasePaint />
       <YellowCollective />
       <TopBounties />

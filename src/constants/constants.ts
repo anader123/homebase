@@ -1,5 +1,13 @@
 export const basePaintStart = "2023-08-09T16:45:00.000Z";
 
+export const nftAddresses = [
+  "0xa449b4f43d9a33fcdcf397b9cc7aa909012709fd",
+  "0xcb28749c24af4797808364d71d71539bc01e76d4",
+  "0x13dc8261fce63499aa25deb512bb1827b411b83b",
+  "0xba5e05cb26b78eda3a2f8e3b3814726305dcac83",
+  "0x2d53d0545cd1275b69040e3c50587e2cc4443a52",
+];
+
 export const memeCoins = [
   {
     name: "Brett",

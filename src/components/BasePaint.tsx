@@ -12,8 +12,6 @@ export default function BasePaint() {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  console.log(data);
-
   return (
     <main className="flex flex-col items-center justify-between">
       <h1>BasePaint Day #{data.tokenId}</h1>

@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["basepaint.xyz", "nouns.build", "cdn.mint.fun"],
+    domains: [
+      "basepaint.xyz",
+      "nouns.build",
+      "cdn.mint.fun",
+      "img.reservoir.tools",
+    ],
   },
 };
 

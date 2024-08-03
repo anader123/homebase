@@ -15,7 +15,6 @@ export default function TopBounties() {
     <main className="flex flex-row items-center justify-around py-4">
       <div className="flex flex-row items-center justify-between">
         {data.map((bounty: any) => {
-          console.log(bounty);
           return (
             <div key={`key-${bounty.title}`}>
               <p>{bounty.title}</p>
