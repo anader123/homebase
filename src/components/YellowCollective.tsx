@@ -16,11 +16,28 @@ export default function YellowCollective() {
   const ethBid = formatUnits(BigInt(parseInt(data.highestBid, 16)), 18);
 
   return (
-    <main className="flex flex-col items-center justify-between">
-      <h1>{data.name}</h1>
-      <Image src={`${data.image}`} alt={data.name} width={500} height={300} />
-      <p>Bidder: {data.highestBidder}</p>
-      <p>Current Bid: {ethBid} ETH</p>
+    <main className="sm:w-[50%] bg-darkgray rounded-md">
+      <div className="flex flex-col items-start justify-between w-full p-6">
+        <h2 className="mb-2 text-2xl">Yellow Collective</h2>
+        <Image
+          src={`${data.image}`}
+          alt={data.name}
+          layout="responsive"
+          width={400}
+          height={400}
+          className="rounded-lg"
+        />
+
+        <div className="mt-2 w-full">
+          <div>
+            <p>{data.name}</p>
+            <p>Current Bid: {ethBid} ETH</p>
+          </div>
+          <button className="bg-blue-600 px-4 py-2 rounded-md w-full border-white hover:opacity-70 mt-4">
+            Bid
+          </button>
+        </div>
+      </div>
     </main>
   );
 }

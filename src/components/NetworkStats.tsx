@@ -22,16 +22,16 @@ export default function NetworkStats() {
   return (
     <main className="flex flex-row items-center justify-between w-full mt-6">
       <div className="flex flex-col items-start">
-        <p className="text-gray-400">Total Value Locked</p>
-        <p className="text-2xl">${formattedTvl} Billion</p>
+        <p className="text-gray-400 hidden sm:flex">Total Value Locked</p>
+        <p className="sm:text-2xl">${formattedTvl} Billion</p>
       </div>
       <div className="flex flex-col items-start">
-        <p className="text-gray-400">Transactions Per Second</p>
-        <p className="text-2xl">{data.dailyTps} TPS</p>
+        <p className="text-gray-400 hidden sm:flex">Transactions Per Second</p>
+        <p className="sm:text-2xl">{data.dailyTps} TPS</p>
       </div>
       <div className="flex flex-col items-start">
-        <p className="text-gray-400">Total Transactions</p>
-        <p className="text-2xl">{formattedTotalTxs} Million</p>
+        <p className="text-gray-400 hidden sm:flex">Total Transactions</p>
+        <p className="sm:text-2xl">{formattedTotalTxs} Million</p>
       </div>
       {/* <p>Transactions Today: {formattedDailyTxs} Mil</p> */}
     </main>

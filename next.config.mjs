@@ -6,6 +6,7 @@ const nextConfig = {
       "nouns.build",
       "cdn.mint.fun",
       "img.reservoir.tools",
+      "ik.imagekit.io",
     ],
   },
 };

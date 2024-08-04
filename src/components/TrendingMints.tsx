@@ -14,8 +14,8 @@ export default function TrendingMints() {
 
   return (
     <main className="flex flex-col w-full items-center py-8 bg-darkgray rounded-md">
-      <h1 className="mb-4 text-xl">Trending Mints</h1>
-      <div className="flex flex-row justify-around items-center w-full">
+      {/* <h1 className="mb-4 text-xl">Trending Mints</h1> */}
+      <div className="flex flex-col sm:flex-row justify-around items-center sm:w-full">
         {data.map((token: any) => {
           return (
             <div key={`key-${token.name}`}>

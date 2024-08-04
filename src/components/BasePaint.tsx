@@ -13,9 +13,9 @@ export default function BasePaint() {
   if (error) return <div>Error: Failed to fetch BasePaint</div>;
 
   return (
-    <main className="">
+    <main className="sm:w-[50%]">
       <div className="bg-darkgray p-6 rounded-md">
-        <h2 className="py-2 text-2xl">BasePaint</h2>
+        <h2 className="mb-2 text-2xl">BasePaint</h2>
         <div className="">
           <Image
             src={data.image}
