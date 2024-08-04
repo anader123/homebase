@@ -10,7 +10,7 @@ export default function BasePaint() {
   });
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div>Error: Failed to fetch BasePaint</div>;
 
   return (
     <main className="">

@@ -10,7 +10,7 @@ export default function TrendingMints() {
   });
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div>Error: Failed to fetch Trending Mints</div>;
 
   return (
     <main className="flex flex-col w-full items-center py-8 bg-darkgray rounded-md">

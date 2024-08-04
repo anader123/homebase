@@ -11,7 +11,7 @@ export default function YellowCollective() {
   });
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div>Error: Failed to fetch Yellow Collective</div>;
 
   const ethBid = formatUnits(BigInt(parseInt(data.highestBid, 16)), 18);
 

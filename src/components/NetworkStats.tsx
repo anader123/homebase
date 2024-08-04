@@ -17,7 +17,7 @@ export default function NetworkStats() {
   );
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div>Error: Failed to fetch NetworkStats</div>;
 
   return (
     <main className="flex flex-row items-center justify-between w-full mt-6">

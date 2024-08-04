@@ -10,7 +10,7 @@ export default function MemeCoins() {
   });
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div>Error: Failed to fetch Memecoins</div>;
 
   return (
     <main className="flex flex-col items-center justify-betwee py-4">

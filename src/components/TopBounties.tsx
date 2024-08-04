@@ -9,7 +9,7 @@ export default function TopBounties() {
   });
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div>Error: Failed to fetch Bounties</div>;
 
   return (
     <main className="flex flex-row items-center justify-around py-4">
