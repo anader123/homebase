@@ -41,15 +41,23 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="bg-black min-h-screen">
-      <Header />
-      <NetworkStats />
-      <TrendingMints />
-      <MemeCoins />
-      <NftProjects />
-      <BasePaint />
-      <YellowCollective />
-      <TopBounties />
+    <main className="bg-black min-h-screen w-full flex-col items-center">
+      <div className="flex flex-col items-center justify-center">
+        <Header />
+        <div className="flex flex-col gap-y-6 items-center justify-center w-[80%]">
+          <NetworkStats />
+          <TrendingMints />
+          <div className="flex flex-row gap-x-2">
+            <MemeCoins />
+            <NftProjects />
+          </div>
+          <div className="flex flex-row w-full">
+            <BasePaint />
+            <YellowCollective />
+          </div>
+          <TopBounties />
+        </div>
+      </div>
     </main>
   );
 }

@@ -4,7 +4,7 @@ import WalletComponents from "@/components/WalletComponents";
 
 const Header: React.FC = () => {
   return (
-    <header className="border-b-2 border-white text-white py-4">
+    <header className="border-b-2 border-white text-white py-4 w-full">
       <nav className="container mx-auto flex justify-between items-center">
         <div className="text-lg font-bold">
           <Link href="/">HomeBase</Link>

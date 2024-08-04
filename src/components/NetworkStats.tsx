@@ -16,14 +16,23 @@ export default function NetworkStats() {
     2
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <></>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <main className="flex flex-row items-center justify-around py-4">
-      <p>TVL: ${formattedTvl} Billion</p>
-      <p>Avg Daily TPS: {data.dailyTps}</p>
-      <p>Total Transactions: {formattedTotalTxs} Million</p>
+    <main className="flex flex-row items-center justify-between w-full mt-6">
+      <div className="flex flex-col items-start">
+        <p className="text-gray-400">Total Value Locked</p>
+        <p className="text-2xl">${formattedTvl} Billion</p>
+      </div>
+      <div className="flex flex-col items-start">
+        <p className="text-gray-400">Transactions Per Second</p>
+        <p className="text-2xl">{data.dailyTps} TPS</p>
+      </div>
+      <div className="flex flex-col items-start">
+        <p className="text-gray-400">Total Transactions</p>
+        <p className="text-2xl">{formattedTotalTxs} Million</p>
+      </div>
       {/* <p>Transactions Today: {formattedDailyTxs} Mil</p> */}
     </main>
   );

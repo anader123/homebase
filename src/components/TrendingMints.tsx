@@ -9,22 +9,22 @@ export default function TrendingMints() {
     queryFn: () => apiFetcher("trendingmints"),
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <></>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <main className="flex flex-col items-center justify-between">
-      <h1>Trending Mints</h1>
-      <div className="flex flex-row items-center justify-between">
+    <main className="flex flex-col w-full items-center py-8 bg-darkgray rounded-md">
+      <h1 className="mb-4 text-xl">Trending Mints</h1>
+      <div className="flex flex-row justify-around items-center w-full">
         {data.map((token: any) => {
           return (
             <div key={`key-${token.name}`}>
-              <h2>{token.name}</h2>
               <Image
                 src={`${token.imageUrl}`}
                 alt={token.name}
                 width={250}
                 height={150}
+                className="rounded-md"
               />
             </div>
           );

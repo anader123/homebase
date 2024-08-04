@@ -9,7 +9,7 @@ export default function NftProjects() {
     queryFn: () => apiFetcher("nftprojects"),
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <></>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
@@ -26,6 +26,7 @@ export default function NftProjects() {
                 src={collection.image}
                 width={50}
                 height={50}
+                className="rounded-sm"
               />
             </div>
           );

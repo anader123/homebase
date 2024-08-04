@@ -9,7 +9,7 @@ export default function MemeCoins() {
     queryFn: () => apiFetcher("memecoins"),
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <></>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (

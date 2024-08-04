@@ -10,7 +10,7 @@ export default function YellowCollective() {
     queryFn: () => apiFetcher("yellowcollective"),
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <></>;
   if (error) return <div>Error: {error.message}</div>;
 
   const ethBid = formatUnits(BigInt(parseInt(data.highestBid, 16)), 18);

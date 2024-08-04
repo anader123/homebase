@@ -9,13 +9,33 @@ export default function BasePaint() {
     queryFn: () => apiFetcher("basepaint"),
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <></>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <main className="flex flex-col items-center justify-between">
-      <h1>BasePaint Day #{data.tokenId}</h1>
-      <Image src={`${data.image}`} alt={data.name} width={500} height={300} />
+    <main className="">
+      <div className="bg-darkgray p-6 rounded-md">
+        <h2 className="py-2 text-2xl">BasePaint</h2>
+        <div className="">
+          <Image
+            src={data.image}
+            alt={data.name}
+            layout="responsive"
+            width={400}
+            height={400}
+            className="rounded-lg"
+          />
+        </div>{" "}
+        <div className="mt-2">
+          <div>
+            <p>Day #{data.tokenId}</p>
+            <p>Theme:</p>
+          </div>
+          <button className="bg-blue-600 px-4 py-2 rounded-md w-full border-white hover:opacity-70 mt-4">
+            Mint
+          </button>
+        </div>
+      </div>
     </main>
   );
 }
