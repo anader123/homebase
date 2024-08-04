@@ -28,12 +28,28 @@ const frameMetadata = getFrameMetadata({
       label: "Yellow Collective Auction",
     },
   ],
-  image: "https://basepaint.xyz/api/og",
+  image: `${process.env.NEXT_PUBLIC_BASE_URL}/og-image.png`,
   postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
 });
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
+  title: "HomeBase",
+  description: "All Base culture in one place.",
+  openGraph: {
+    title: "HomeBase",
+    description: "All Base culture in one place.",
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    type: "website",
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "HomeBase OG Image",
+      },
+    ],
+  },
   other: {
     ...frameMetadata,
   },
