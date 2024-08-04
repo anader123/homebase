@@ -13,11 +13,11 @@ const frameMetadata = getFrameMetadata({
   buttons: [
     {
       action: "post",
-      label: "Memecoins",
+      label: "BasePaint",
     },
     {
       action: "post",
-      label: "Trending Mints",
+      label: "Trending Mint",
     },
     {
       action: "post",
@@ -25,11 +25,11 @@ const frameMetadata = getFrameMetadata({
     },
     {
       action: "post",
-      label: "BasePaint",
+      label: "Yellow Collective Auction",
     },
   ],
   image: "https://basepaint.xyz/api/og",
-  postUrl: "http://localhost:3000/api/frame",
+  postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
 });
 
 export const metadata: Metadata = {
