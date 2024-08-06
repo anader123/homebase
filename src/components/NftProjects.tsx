@@ -21,8 +21,10 @@ export default function NftProjects() {
         <table className="w-full table-auto border-collapse rounded-lg overflow-hidden">
           <thead>
             <tr className="bg-gray-700 text-white">
-              <th className="p-2">Project</th>
-              <th className="p-2">Floor Ask Price</th>
+              <th className="ml-1 p-2 flex flex-start">
+                <p>Project</p>
+              </th>
+              <th className="p-2">Floor Price</th>
             </tr>
           </thead>
           <tbody>

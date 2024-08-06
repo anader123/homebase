@@ -8,6 +8,8 @@ import MemeCoins from "@/components/MemeCoins";
 import NftProjects from "@/components/NftProjects";
 import { getFrameMetadata } from "@coinbase/onchainkit/frame";
 import type { Metadata } from "next";
+import Moshicam from "@/components/Moshicam";
+import SpeedTracer from "@/components/SpeedTracer";
 
 const frameMetadata = getFrameMetadata({
   buttons: [
@@ -61,9 +63,9 @@ export default function Home() {
             <NftProjects />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-4 sm:gap-x-6 w-full">
+            <SpeedTracer />
             <BasePaint />
-            <BasePaint />
-            <BasePaint />
+            <Moshicam />
             <YellowCollective />
           </div>
           <TopBounties />

@@ -1,4 +1,7 @@
 export const basePaintStart = "2023-08-09T16:45:00.000Z";
+export const speedTracerStart = "2024-01-09T16:45:00.000Z";
+
+export const speedtracerAddress = "0xaa4d3bc0fc9b7e2e6253ed83efb5dce9a21ae1c9";
 
 export const nftAddresses = [
   "0xa449b4f43d9a33fcdcf397b9cc7aa909012709fd",

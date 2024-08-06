@@ -19,7 +19,7 @@ export default function BasePaint() {
   return (
     <main className="bg-darkgray p-6 rounded-md">
       <h2 className="mb-2 text-xl">BasePaint</h2>
-      <div className="">
+      <div className="p-1 bg-gray-700 rounded-md">
         <Image
           src={data.image}
           alt={data.name}

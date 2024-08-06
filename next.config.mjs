@@ -8,6 +8,7 @@ const nextConfig = {
       "img.reservoir.tools",
       "ik.imagekit.io",
       "assets.coingecko.com",
+      "www.speedtracer.xyz",
     ],
   },
 };

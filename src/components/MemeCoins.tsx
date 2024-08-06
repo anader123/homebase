@@ -21,7 +21,9 @@ export default function MemeCoins() {
         <table className="w-full table-auto border-collapse rounded-lg overflow-hidden">
           <thead>
             <tr className="bg-gray-700 text-white">
-              <th className="p-2">Coin</th>
+              <th className="ml-1 p-2 flex flex-start">
+                <p>Coin</p>
+              </th>
               <th className="p-2">Price</th>
               <th className="p-2">Market Cap</th>
               <th className="p-2">24h Change</th>
