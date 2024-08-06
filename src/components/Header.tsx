@@ -22,7 +22,7 @@ const Header: React.FC = () => {
           </li>
           <li>
             <Link
-              href="/test"
+              href="https://www.base.org/ecosystem"
               className="hover:underline"
               target="_blank"
               rel="noopener noreferrer"

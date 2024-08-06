@@ -30,9 +30,9 @@ export default function BasePaint() {
         />
       </div>{" "}
       <div className="mt-2">
-        <div className="text-gray-400">
+        <div>
           <p>Day #{data.tokenId}</p>
-          <p>Theme: {theme[0].value}</p>
+          <p className="text-sm text-gray-400">Theme: {theme[0].value}</p>
         </div>
         <button className="bg-blue-600 px-4 py-2 rounded-md w-full border-white hover:opacity-70 mt-4">
           Mint

@@ -29,9 +29,9 @@ export default function YellowCollective() {
         />
 
         <div className="mt-2 w-full">
-          <div className="text-gray-400">
+          <div className="">
             <p>{data.name}</p>
-            <p>Current Bid: {ethBid} ETH</p>
+            <p className="text-sm text-gray-400">Current Bid: {ethBid} ETH</p>
           </div>
           <button className="bg-blue-600 px-4 py-2 rounded-md w-full border-white hover:opacity-70 mt-4">
             Bid

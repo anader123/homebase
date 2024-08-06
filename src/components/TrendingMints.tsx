@@ -24,14 +24,17 @@ export default function TrendingMints() {
               className="flex flex-col items-center gap-2 text-gray-400"
               key={`key-${token.name}`}
             >
-              <img
-                src={`${token.imageUrl}`}
-                alt={token.name}
-                width={250}
-                height={150}
-                className="rounded-md"
-              />
-              <p>{token.name}</p>
+              <div className=" bg-gray-800 p-2 rounded-md">
+                <img
+                  src={`${token.imageUrl}`}
+                  alt={token.name}
+                  width={250}
+                  height={150}
+                  className="rounded-md"
+                />
+              </div>
+
+              <p className="text-sm">{token.name}</p>
             </div>
           );
         })}

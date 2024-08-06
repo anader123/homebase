@@ -60,7 +60,8 @@ export default function Home() {
             <MemeCoins />
             <NftProjects />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-x-6 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-4 sm:gap-x-6 w-full">
+            <BasePaint />
             <BasePaint />
             <BasePaint />
             <YellowCollective />
