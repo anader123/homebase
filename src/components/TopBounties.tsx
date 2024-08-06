@@ -22,7 +22,7 @@ export default function TopBounties() {
               key={`key-${bounty.title}`}
             >
               <div className="flex flex-row gap-1 items-center">
-                <Image
+                <img
                   src={`${bounty.reward_summary.token.image_url}`}
                   alt={bounty.token_symbol_display}
                   width={20}

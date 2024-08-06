@@ -19,7 +19,7 @@ export default function TrendingMints() {
         {data.map((token: any) => {
           return (
             <div key={`key-${token.name}`}>
-              <Image
+              <img
                 src={`${token.imageUrl}`}
                 alt={token.name}
                 width={250}

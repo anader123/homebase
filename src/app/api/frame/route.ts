@@ -32,30 +32,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     allowFramegear,
   });
 
-  if (message?.button === 2) {
-    const trending = await fetch(
-      "https://mint.fun/api/mintfun/feed/trending?range=24h&chain=8453"
-    );
-
-    const data = await trending.json();
-    const topMint = data.collections[0];
-
-    return new NextResponse(
-      getFrameHtmlResponse({
-        buttons: [
-          {
-            action: "link",
-            label: `${topMint.name}`,
-            target: `https://mint.fun/base/${topMint.contract.slice(5)}`,
-          },
-        ],
-        image: {
-          src: `${topMint.imageUrl}`,
-          aspectRatio: "1:1",
-        },
-        postUrl: "https://build-onchain-apps.vercel.app/api/frame",
-      })
-    );
+  if (!isValid) {
+    return new NextResponse("Message not valid", { status: 500 });
   }
 
   if (message?.button === 1) {
@@ -83,7 +61,33 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     );
   }
 
-  if (message?.button === 4) {
+  if (message?.button === 2) {
+    const trending = await fetch(
+      "https://mint.fun/api/mintfun/feed/trending?range=24h&chain=8453"
+    );
+
+    const data = await trending.json();
+    const topMint = data.collections[0];
+
+    return new NextResponse(
+      getFrameHtmlResponse({
+        buttons: [
+          {
+            action: "link",
+            label: `${topMint.name}`,
+            target: `https://mint.fun/base/${topMint.contract.slice(5)}`,
+          },
+        ],
+        image: {
+          src: `${topMint.imageUrl}`,
+          aspectRatio: "1:1",
+        },
+        postUrl: "https://build-onchain-apps.vercel.app/api/frame",
+      })
+    );
+  }
+
+  if (message?.button === 3) {
     const yellowCollectiveData = await fetchInternalData("yellowcollective");
     return new NextResponse(
       getFrameHtmlResponse({
@@ -94,6 +98,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
             target: "https://www.yellowcollective.xyz/",
           },
         ],
+        input: {
+          text: "Bid Amount",
+        },
         image: {
           src: `${yellowCollectiveData.image}`,
           aspectRatio: "1:1",

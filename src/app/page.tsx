@@ -12,19 +12,12 @@ import type { Metadata } from "next";
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
-      action: "post",
       label: "BasePaint",
     },
     {
-      action: "post",
       label: "Trending Mint",
     },
     {
-      action: "post",
-      label: "NFT Projects",
-    },
-    {
-      action: "post",
       label: "Yellow Collective Auction",
     },
   ],
