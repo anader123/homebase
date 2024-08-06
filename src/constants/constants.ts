@@ -11,35 +11,30 @@ export const nftAddresses = [
 export const memeCoins = [
   {
     name: "Brett",
-    address: "",
     coingeckoName: "based-brett",
     image:
       "https://assets.coingecko.com/coins/images/35529/standard/1000050750.png?1709031995",
   },
   {
     name: "Toshi",
-    address: "",
     coingeckoName: "toshi",
     image:
       "https://assets.coingecko.com/coins/images/31126/standard/Toshi_Logo_-_Circular.png?1721677476",
   },
   {
     name: "Degen",
-    address: "",
     coingeckoName: "degen-base",
     image:
       "https://assets.coingecko.com/coins/images/34515/standard/android-chrome-512x512.png?1706198225",
   },
   {
     name: "Higher",
-    address: "",
     coingeckoName: "higher",
     image:
       "https://assets.coingecko.com/coins/images/36084/standard/200x200logo.png?1710427814",
   },
   {
     name: "mfercoin",
-    address: "",
     coingeckoName: "mfercoin",
     image:
       "https://assets.coingecko.com/coins/images/36550/standard/mfercoin-logo.png?1711876821",

@@ -13,27 +13,43 @@ export default function NftProjects() {
   if (error) return <div>Error: NFT Projects</div>;
 
   return (
-    <main className="flex flex-col items-center justify-betwee py-4 sm:w-[50%] rounded-md bg-darkgray">
-      <h2 className="text-xl">NFT Projects</h2>
-      <div className="flex flex-col items-center justify-between gap-4 mt-4">
-        {data.map((collection: any) => {
-          return (
-            <div
-              className="flex flex-row items-center gap-2"
-              key={`key-${collection.name}`}
-            >
-              <Image
-                alt={collection.name}
-                src={collection.image}
-                width={30}
-                height={30}
-                className="rounded-full"
-              />
-              <p>{collection.name}</p>
-              <p>{collection.floorAskPrice.toFixed(3)} ETH</p>
-            </div>
-          );
-        })}
+    <main className="flex flex-col items-center justify-between p-6 rounded-md bg-darkgray w-full">
+      <div className="w-full flex flex-start">
+        <h2 className="text-xl">NFT Projects</h2>
+      </div>
+      <div className="w-full mt-4">
+        <table className="w-full table-auto border-collapse rounded-lg overflow-hidden">
+          <thead>
+            <tr className="bg-gray-700 text-white">
+              <th className="p-2">Project</th>
+              <th className="p-2">Floor Ask Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((collection: any) => (
+              <tr
+                key={`key-${collection.name}`}
+                className="bg-gray-800 text-white"
+              >
+                <td className="p-2 text-left">
+                  <div className="flex items-center">
+                    <Image
+                      alt={collection.name}
+                      src={collection.image}
+                      width={30}
+                      height={30}
+                      className="rounded-full inline-block mr-2"
+                    />
+                    <span>{collection.name}</span>
+                  </div>
+                </td>
+                <td className="p-2 text-center">
+                  {collection.floorAskPrice.toFixed(3)} ETH
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </main>
   );

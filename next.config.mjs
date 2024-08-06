@@ -7,6 +7,7 @@ const nextConfig = {
       "cdn.mint.fun",
       "img.reservoir.tools",
       "ik.imagekit.io",
+      "assets.coingecko.com",
     ],
   },
 };

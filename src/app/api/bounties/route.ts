@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
   const bountiesData = await bounties.json();
   const nonNullPrices = bountiesData.bounties
     .filter((bounty: any) => bounty?.reward_summary?.usd_value != null)
-    .slice(0, 3);
+    .slice(0, 6);
 
   return NextResponse.json(nonNullPrices, { status: 200 });
 }
