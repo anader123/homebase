@@ -11,10 +11,7 @@ const queryClient = new QueryClient();
 const Providers = ({ children }: { children: ReactNode }) => (
   <WagmiProvider config={wagmiConfig}>
     <QueryClientProvider client={queryClient}>
-      <OnchainKitProvider
-        apiKey={process.env.NEXT_PUBLIC_CB_API_KEY}
-        chain={base}
-      >
+      <OnchainKitProvider apiKey={process.env.CB_API_KEY} chain={base}>
         {children}
       </OnchainKitProvider>
     </QueryClientProvider>
