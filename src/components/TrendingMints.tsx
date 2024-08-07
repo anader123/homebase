@@ -13,11 +13,11 @@ export default function TrendingMints() {
   if (error) return <div>Error: Failed to fetch Trending Mints</div>;
 
   return (
-    <main className="flex flex-col w-full items-center p-6 bg-darkgray rounded-md">
+    <main className="flex flex-col w-full items-center p-6 bg-darkgray rounded-md mt-6 sm:mt-0">
       <div className="w-full flex flex-start">
         <h2 className="mb-2 text-xl">Trending Mints</h2>
       </div>
-      <div className="flex flex-col sm:flex-row justify-around items-center sm:w-full">
+      <div className="flex flex-col sm:flex-row justify-around items-center sm:w-full gap-y-8 sm:gap-y-0 mt-4 sm:mt-0">
         {data.map((token: any) => {
           return (
             <div key={`key-${token.name}`}>

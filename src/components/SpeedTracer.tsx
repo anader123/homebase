@@ -13,11 +13,11 @@ export default function SpeedTracer() {
   if (error) return <div>Error: Failed to fetch BasePaint</div>;
 
   return (
-    <main className="bg-darkgray p-6 rounded-md">
+    <main className="flex flex-col bg-darkgray p-6 rounded-md">
       <h2 className="mb-2 text-xl">SpeedTracer</h2>
-      <div className="p-1 bg-gray-700 rounded-md flex justify-center w-full">
-        <img src={data.image} alt={data.name} className="rounded-lg w-[62%]" />
-      </div>{" "}
+      <div className="p-1 bg-gray-800 border border-gray-700 rounded-md flex justify-center w-full flex-grow">
+        <img src={data.image} alt={data.name} className="rounded-lg w-[62%] " />
+      </div>
       <div className="mt-2">
         <div>
           <p>{data.name}</p>

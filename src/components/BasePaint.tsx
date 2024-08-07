@@ -34,27 +34,27 @@ export default function BasePaint() {
   });
 
   return (
-    <main className="bg-darkgray p-6 rounded-md">
-      <h2 className="mb-2 text-xl">BasePaint</h2>
-      <div className="p-1 bg-gray-700 rounded-md">
+    <main className="flex flex-col bg-darkgray rounded-md">
+      <div className="flex flex-col items-start justify-between w-full p-6 flex-grow">
+        <h2 className="mb-2 text-xl">BasePaint</h2>
         <Image
           src={data.image}
           alt={data.name}
           layout="responsive"
           width={400}
           height={400}
-          className="rounded-lg"
+          className="rounded-lg p-2 bg-gray-800 border border-gray-700"
         />
-      </div>{" "}
-      <div className="mt-2">
-        <div>
-          <p>Day #{data.tokenId}</p>
-          <p className="text-sm text-gray-400">Theme: {theme[0].value}</p>
+        <div className="mt-2 w-full">
+          <div>
+            <p>Day #{data.tokenId}</p>
+            <p className="text-sm text-gray-400">Theme: {theme[0].value}</p>
+          </div>
+          <button onClick={() => openModal()} className={BUTTON_CLASS}>
+            Mint
+          </button>
+          <Modal isOpen={isModalOpen} onClose={closeModal} details={data} />
         </div>
-        <button onClick={() => openModal()} className={BUTTON_CLASS}>
-          Mint
-        </button>
-        <Modal isOpen={isModalOpen} onClose={closeModal} details={data} />
       </div>
     </main>
   );

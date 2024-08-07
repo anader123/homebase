@@ -30,7 +30,7 @@ const WalletComponents: React.FC = () => {
           className={`${BUTTON_CLASS} ${
             !isConnected
               ? "bg-blue-600 hover:bg-blue-600"
-              : "bg-white hover:bg-gray-400"
+              : "bg-white hover:bg-gray-100"
           } mt-0 font-normal`}
         >
           <Avatar className="h-6 w-6" />

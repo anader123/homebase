@@ -13,7 +13,7 @@ const Header: React.FC = () => {
           <li>
             <Link
               href="https://www.base.org/"
-              className="hover:underline"
+              className="hover:underline hover:opacity-70 hidden sm:flex"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -23,7 +23,7 @@ const Header: React.FC = () => {
           <li>
             <Link
               href="https://www.base.org/ecosystem"
-              className="hover:underline"
+              className="hover:underline hover:opacity-70 hidden sm:flex"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -33,7 +33,7 @@ const Header: React.FC = () => {
           <li>
             <Link
               href="https://base.blockscout.com"
-              className="hover:underline"
+              className="hover:underline hover:opacity-70 hidden sm:flex"
               target="_blank"
               rel="noopener noreferrer"
             >

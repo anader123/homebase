@@ -29,13 +29,13 @@ export default function Moshicam() {
   if (error) return <div>Error: Failed to fetch Moshicam</div>;
 
   return (
-    <main className="bg-darkgray p-6 rounded-md">
+    <main className="flex flex-col bg-darkgray p-6 rounded-md">
       <h2 className="mb-2 text-xl">Moshicam</h2>
-      <div className="p-1 m-2 bg-gray-700 rounded-md">
+      <div className="p-1 m-2 rounded-md flex-grow">
         <img
           src={data.previews.image_medium_url}
           alt={data.contract_address}
-          className="rounded-md"
+          className="rounded-md bg-gray-800 border border-gray-700"
         />
       </div>
       <div className="mt-2">

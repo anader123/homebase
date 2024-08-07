@@ -15,7 +15,7 @@ export default function TopBounties() {
   return (
     <main className="w-full p-6 bg-darkgray rounded-md">
       <h2 className="text-xl mb-2">Open Bounties</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-6 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-6 w-full gap-y-4">
         {data.map((bounty: any) => {
           return (
             <a

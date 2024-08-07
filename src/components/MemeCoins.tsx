@@ -25,7 +25,7 @@ export default function MemeCoins() {
                 <p>Coin</p>
               </th>
               <th className="p-2">Price</th>
-              <th className="p-2">Market Cap</th>
+              <th className="p-2 hidden sm:table-cell">Market Cap</th>
               <th className="p-2">24h Change</th>
             </tr>
           </thead>
@@ -45,7 +45,7 @@ export default function MemeCoins() {
                 <td className="p-2 text-center">
                   ${coin.priceData.usd.toFixed(4)}
                 </td>
-                <td className="p-2 text-center">
+                <td className="p-2 text-center hidden sm:table-cell">
                   $
                   {coin.priceData.usd_market_cap.toLocaleString(undefined, {
                     maximumFractionDigits: 0,

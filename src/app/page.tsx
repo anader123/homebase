@@ -58,11 +58,11 @@ export default function Home() {
         <div className="flex flex-col gap-y-6 sm:gap-y-10 items-center justify-center px-4 sm:px-10">
           <NetworkStats />
           <TrendingMints />
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 sm:gap-x-6">
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 sm:gap-x-6 gap-y-6 sm:gap-y-0">
             <MemeCoins />
             <NftProjects />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-4 sm:gap-x-6 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-4 sm:gap-x-6 w-full gap-y-6 sm:gap-y-0">
             <SpeedTracer />
             <BasePaint />
             <Moshicam />

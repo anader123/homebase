@@ -16,8 +16,8 @@ export default function YellowCollective() {
   const ethBid = formatUnits(BigInt(parseInt(data.highestBid, 16)), 18);
 
   return (
-    <main className="bg-darkgray rounded-md">
-      <div className="flex flex-col items-start justify-between w-full p-6">
+    <main className="flex flex-col bg-darkgray rounded-md">
+      <div className="flex flex-col items-start justify-between w-full p-6 flex-grow">
         <h2 className="mb-2 text-xl">Yellow Collective</h2>
         <Image
           src={`${data.image}`}
@@ -25,11 +25,11 @@ export default function YellowCollective() {
           layout="responsive"
           width={400}
           height={400}
-          className="rounded-lg"
+          className="rounded-lg p-2 bg-gray-800 border border-gray-700"
         />
 
         <div className="mt-2 w-full">
-          <div className="">
+          <div>
             <p>{data.name}</p>
             <p className="text-sm text-gray-400">Current Bid: {ethBid} ETH</p>
           </div>
