@@ -188,5 +188,9 @@ function toHumanErrorMessage(message?: string | null): string | null {
     return "User rejected the request.";
   }
 
+  if (message.includes("Connector not connected")) {
+    return "Wallet not connected. Please connect wallet.";
+  }
+
   return message;
 }

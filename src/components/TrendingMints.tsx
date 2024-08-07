@@ -20,21 +20,23 @@ export default function TrendingMints() {
       <div className="flex flex-col sm:flex-row justify-around items-center sm:w-full">
         {data.map((token: any) => {
           return (
-            <div
-              className="flex flex-col items-center gap-2 text-gray-400"
-              key={`key-${token.name}`}
-            >
-              <div className=" bg-gray-800 p-2 rounded-md">
-                <img
-                  src={`${token.imageUrl}`}
-                  alt={token.name}
-                  width={250}
-                  height={150}
-                  className="rounded-md"
-                />
-              </div>
-
-              <p className="text-sm">{token.name}</p>
+            <div key={`key-${token.name}`}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`https://mint.fun/base/${token.contract.slice(5)}`}
+              >
+                <div className="flex flex-col items-center text-gray-400 hover:opacity-80 transform transition-transform duration-300 hover:-translate-y-1 bg-gray-800 p-2 rounded-lg border border-gray-700">
+                  <div className="p-2">
+                    <img
+                      src={`${token.imageUrl}`}
+                      alt={token.name}
+                      className="rounded-md"
+                    />
+                  </div>
+                  <p className="text-sm">{token.name}</p>
+                </div>
+              </a>
             </div>
           );
         })}

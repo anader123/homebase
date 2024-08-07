@@ -39,7 +39,11 @@ export default function TopBounties() {
                 <p className="uppercase">{bounty.token_symbol_display}</p>
                 {bounty.token_symbol_display !== "USDC" && (
                   <p className="text-sm text-gray-400">
-                    (${bounty.reward_summary.usd_value})
+                    ($
+                    {Number(
+                      parseFloat(bounty.reward_summary.usd_value).toFixed(0)
+                    ).toLocaleString()}
+                    )
                   </p>
                 )}
               </div>

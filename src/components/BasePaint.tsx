@@ -9,6 +9,7 @@ import classNames from "classnames";
 import { useReadContract, useWriteContract, useAccount } from "wagmi";
 import { addresses, abis } from "@/constants/constants";
 import { formatEther, zeroAddress } from "viem";
+import { ConnectWallet } from "@coinbase/onchainkit/wallet";
 
 const BUTTON_CLASS = classNames(
   "bg-blue-600 px-4 py-2 rounded-md w-full border-white hover:opacity-70 mt-4"
@@ -72,7 +73,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
   const [howMany, setHowMany] = useState(1);
   const write = useWriteContract();
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
 
   const price = useReadContract({
     address: addresses.basepaint,
@@ -115,22 +116,29 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
                   }}
                 />
               </div>
-              <button
-                onClick={() =>
-                  write.writeContract({
-                    address: addresses.basepaintRewards,
-                    abi: abis.basepaint,
-                    functionName: "mintLatest",
-                    args: [address, howMany, zeroAddress],
-                    value:
-                      BigInt((price.data as string) ?? 26000000000000000) *
-                      BigInt(howMany),
-                  })
-                }
-                className={`${BUTTON_CLASS}`}
-              >
-                Mint
-              </button>
+              {isConnected ? (
+                <button
+                  onClick={() =>
+                    write.writeContract({
+                      address: addresses.basepaintRewards,
+                      abi: abis.basepaint,
+                      functionName: "mintLatest",
+                      args: [address, howMany, zeroAddress],
+                      value:
+                        BigInt((price.data as string) ?? 26000000000000000) *
+                        BigInt(howMany),
+                    })
+                  }
+                  className={`${BUTTON_CLASS}`}
+                >
+                  Mint
+                </button>
+              ) : (
+                <ConnectWallet
+                  className={`${BUTTON_CLASS} hover:bg-blue-600 font-normal`}
+                />
+              )}
+
               <div className="w-full flex justify-center mt-2 gap-2">
                 <div className="text-gray-400 text-sm">
                   Total:{" "}
