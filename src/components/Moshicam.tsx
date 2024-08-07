@@ -31,7 +31,7 @@ export default function Moshicam() {
   return (
     <main className="flex flex-col bg-darkgray p-6 rounded-md">
       <h2 className="mb-2 text-xl">Moshicam</h2>
-      <div className="p-1 m-2 rounded-md flex-grow">
+      <div className="rounded-md flex-grow">
         <img
           src={data.previews.image_medium_url}
           alt={data.contract_address}
