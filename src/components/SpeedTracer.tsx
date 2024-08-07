@@ -25,7 +25,16 @@ export default function SpeedTracer() {
             Current Record: {data.fastestTime} seconds
           </p>
         </div>
-        <button className="bg-blue-600 px-4 py-2 rounded-md w-full border-white hover:opacity-70 mt-4">
+        <button
+          onClick={() => {
+            window.open(
+              "https://www.speedtracer.xyz/",
+              "_blank",
+              "noopener,noreferrer"
+            );
+          }}
+          className="bg-blue-600 px-4 py-2 rounded-md w-full border-white hover:opacity-70 mt-4"
+        >
           Race
         </button>
       </div>

@@ -58,7 +58,7 @@ export default function MemeCoins() {
                       : "text-green-500"
                   }`}
                 >
-                  {coin.priceData.usd_24h_change.toFixed(0)}%
+                  {coin.priceData.usd_24h_change.toFixed(2)}%
                 </td>
               </tr>
             ))}

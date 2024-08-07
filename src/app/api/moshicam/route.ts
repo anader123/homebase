@@ -12,12 +12,8 @@ export async function GET(req: NextRequest) {
     );
   }
   const data = await response.json();
+  const randomIndex = Math.floor(Math.random() * 20);
+  const randomMint = data.tokens[randomIndex];
 
-  const highestRankedMints = data.tokens.sort(
-    (a: { leaderboard_rank: number }, b: { leaderboard_rank: number }) => {
-      a.leaderboard_rank - b.leaderboard_rank;
-    }
-  );
-
-  return NextResponse.json(highestRankedMints, { status: 200 });
+  return NextResponse.json(randomMint, { status: 200 });
 }

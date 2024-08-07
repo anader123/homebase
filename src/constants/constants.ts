@@ -1,5 +1,11 @@
 export const basePaintStart = "2023-08-09T16:45:00.000Z";
-export const speedTracerStart = "2024-01-09T16:45:00.000Z";
+export const speedTracerStart = "2024-01-09T14:45:00.000Z";
+
+export const addresses: Record<string, `0x${string}`> = {
+  speedtracer: "0xaa4d3bc0fc9b7e2e6253ed83efb5dce9a21ae1c9",
+  basepaint: "0xba5e05cb26b78eda3a2f8e3b3814726305dcac83",
+  basepaintRewards: "0xaff1A9E200000061fC3283455d8B0C7e3e728161",
+};
 
 export const speedtracerAddress = "0xaa4d3bc0fc9b7e2e6253ed83efb5dce9a21ae1c9";
 
@@ -10,6 +16,61 @@ export const nftAddresses = [
   "0xba5e05cb26b78eda3a2f8e3b3814726305dcac83",
   "0x2d53d0545cd1275b69040e3c50587e2cc4443a52",
 ];
+
+export const abis = {
+  basepaint: [
+    {
+      inputs: [],
+      name: "openEditionPrice",
+      outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "address",
+          name: "sendMintsTo",
+          type: "address",
+        },
+        {
+          internalType: "uint256",
+          name: "count",
+          type: "uint256",
+        },
+        {
+          internalType: "address",
+          name: "sendRewardsTo",
+          type: "address",
+        },
+      ],
+      name: "mintLatest",
+      outputs: [],
+      stateMutability: "payable",
+      type: "function",
+    },
+  ],
+  moshicam: [
+    {
+      inputs: [],
+      name: "mintPrice",
+      outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [
+        { internalType: "address", name: "to", type: "address" },
+        { internalType: "uint256", name: "id", type: "uint256" },
+        { internalType: "uint256", name: "quantity", type: "uint256" },
+      ],
+      name: "collect",
+      outputs: [],
+      stateMutability: "payable",
+      type: "function",
+    },
+  ],
+};
 
 export const memeCoins = [
   {

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { speedTracerStart } from "@/constants/constants";
-import { speedtracerAddress } from "@/constants/constants";
+import { addresses } from "@/constants/constants";
 
 export async function GET(req: NextRequest) {
   const calcToday = (startDate: Date, endDate: Date) => {
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     `https://www.speedtracer.xyz/api/leaderboard?address=undefined&track=${today}`
   );
 
-  const tokenUrl = `https://api-base.reservoir.tools/tokens/v7?tokens=${speedtracerAddress}:${today}`;
+  const tokenUrl = `https://api-base.reservoir.tools/tokens/v7?tokens=${addresses.speedtracer}:${today}`;
   const tokenResponse = await fetch(tokenUrl, {
     headers: {
       "x-api-key": process.env.RESERVOIR_API_KEY!,
@@ -27,8 +27,6 @@ export async function GET(req: NextRequest) {
 
   const leaderboardData = await leaderboardResponse.json();
   const tokenData = await tokenResponse.json();
-
-  console.log(tokenData.tokens[0].token);
   const token = tokenData.tokens[0].token;
 
   const finalData = {
