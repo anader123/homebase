@@ -6,7 +6,7 @@ import {
 import { NextRequest, NextResponse } from "next/server";
 import { basePaintStart } from "@/constants/constants";
 
-export const fetchInternalData = async (path: string) => {
+const fetchInternalData = async (path: string) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/${path}`,
     {
@@ -109,28 +109,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       })
     );
   }
-
-  //   {
-  //     message: {
-  //       address: null,
-  //       button: 1,
-  //       following: false,
-  //       input: '',
-  //       interactor: {
-  //         fid: 0,
-  //         custody_address: '0xnotarealaddress',
-  //         verified_accounts: [],
-  //         verified_addresses: [Object]
-  //       },
-  //       liked: false,
-  //       recasted: false,
-  //       state: { serialized: '' },
-  //       transaction: null,
-  //       valid: true,
-  //       raw: { valid: true, action: {} }
-  //     },
-  //     isValid: true
-  //   }
 
   return new NextResponse(
     getFrameHtmlResponse({
