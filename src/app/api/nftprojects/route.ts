@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
 
   const response = await fetch(url, {
     headers: {
-      "x-api-key": process.env.RESERVOIR_API_KEY!,
+      "x-api-key": process.env.NEXT_PUBLIC_RESERVOIR_API_KEY!,
     },
   });
 

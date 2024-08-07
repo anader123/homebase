@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   const tokenUrl = `https://api-base.reservoir.tools/tokens/v7?tokens=${addresses.speedtracer}:${today}`;
   const tokenResponse = await fetch(tokenUrl, {
     headers: {
-      "x-api-key": process.env.RESERVOIR_API_KEY!,
+      "x-api-key": process.env.NEXT_PUBLIC_RESERVOIR_API_KEY!,
     },
   });
 
