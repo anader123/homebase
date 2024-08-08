@@ -9,6 +9,7 @@ const nextConfig = {
       "ik.imagekit.io",
       "assets.coingecko.com",
       "www.speedtracer.xyz",
+      "i.seadn.io",
     ],
   },
 };

@@ -36,7 +36,7 @@ export default function TrendingMints() {
                       className="rounded-md"
                     />
                   </div>
-                  <p className="text-sm">{token.name}</p>
+                  <p className="text-sm text-center">{token.name}</p>
                 </div>
               </a>
             </div>

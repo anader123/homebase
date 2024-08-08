@@ -29,6 +29,8 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
   const [isBidValid, setIsBidValid] = useState(true);
   const write = useWriteContract();
   const { isConnected, address } = useAccount();
+  const isMint =
+    details.writeAddress !== CONTRACT_ADDRESSES.yellowcollectiveAuction;
 
   const price = useReadContract({
     address: details.readAddress,
@@ -56,14 +58,11 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
 
     const enteredBid = parseFloat(value);
     const highestBid = parseFloat(details.highestEthBid || "0");
-    setIsBidValid(enteredBid > highestBid);
+    setIsBidValid(enteredBid * 1.1 > highestBid);
   };
 
   useEffect(() => {
-    if (
-      write.isSuccess &&
-      details.writeAddress !== CONTRACT_ADDRESSES.yellowcollectiveAuction
-    ) {
+    if (write.isSuccess && isMint) {
       setHowMany(1);
     }
   }, [write.isSuccess]);
@@ -102,8 +101,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
               <h3 className="text-white text-2xl mb-2">{details.name}</h3>
               <img src={details.image} alt={details.name} />
               <div>
-                {details.writeAddress !==
-                CONTRACT_ADDRESSES.yellowcollectiveAuction ? (
+                {isMint ? (
                   <div>
                     <Stepper
                       value={howMany}
@@ -140,16 +138,30 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
                     )}
                   </div>
                 )}
+                {write.isSuccess && (
+                  <div className="text-center">
+                    <a
+                      href={`https://base.blockscout.com/tx/${write!.data}`}
+                      className="text-blue-500 text-lg font-bold underline hover:opacity-80"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {`${
+                        details.writeAddress !==
+                        CONTRACT_ADDRESSES.yellowcollectiveAuction
+                          ? "Mint"
+                          : "Bid"
+                      } successful!`}
+                    </a>
+                  </div>
+                )}
               </div>
               {isConnected ? (
                 <button
                   onClick={() => {
-                    const value =
-                      details.writeAddress !==
-                      CONTRACT_ADDRESSES.yellowcollectiveAuction
-                        ? BigInt((price.data as string) ?? "0") *
-                          BigInt(howMany)
-                        : parseEther(howMuch || "0");
+                    const value = isMint
+                      ? BigInt((price.data as string) ?? "0") * BigInt(howMany)
+                      : parseEther(howMuch || "0");
 
                     write.writeContract({
                       address: details.writeAddress,
@@ -160,6 +172,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
                     });
                   }}
                   className={`${BUTTON_CLASS}`}
+                  disabled={isMint ? false : !isBidValid}
                 >
                   {details.writeAddress !==
                   CONTRACT_ADDRESSES.yellowcollectiveAuction
@@ -173,16 +186,6 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
               )}
 
               <div className="w-full flex flex-col items-center justify-center mt-2 gap-2">
-                {write.isSuccess && (
-                  <a
-                    href={`https://base.blockscout.com/tx/${write!.data}`}
-                    className="text-white underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Transaction
-                  </a>
-                )}
                 {write.error && (
                   <div
                     title={write.error.message}

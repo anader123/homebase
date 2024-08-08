@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { NFT_ADDRESSES } from "@/constants/constants";
+import { NFT_ADDRESSES, NFT_PROJECTS } from "@/constants/constants";
 
 export async function GET(req: NextRequest) {
   const url = `https://api-base.reservoir.tools/collections/v5?sortBy=floorAskPrice&contract=${NFT_ADDRESSES.join(
@@ -23,14 +23,22 @@ export async function GET(req: NextRequest) {
 
   const nftData = data.collections
     .sort((a: any, b: any) => {
-      return b.floorAsk.price.amount.decimal - a.floorAsk.price.amount.decimal;
+      const aPrice = a.floorAsk?.price?.amount?.decimal || 0;
+      const bPrice = b.floorAsk?.price?.amount?.decimal || 0;
+      return bPrice - aPrice;
     })
-    .map((collection: any) => ({
-      name: collection.name,
-      floorAskPrice: collection.floorAsk.price.amount.decimal,
-      image: collection.image,
-      weeklyChange: collection.floorSaleChange["7day"],
-    }));
+    .map((collection: any) => {
+      const matchingProjects = NFT_PROJECTS.filter((nft) => {
+        return nft.name.toLowerCase() === collection.name.toLowerCase();
+      });
+
+      return {
+        name: collection.name,
+        floorAskPrice: collection.floorAsk?.price?.amount?.decimal || 0,
+        image: matchingProjects.length > 0 ? matchingProjects[0].image : "",
+        weeklyChange: collection.floorSaleChange?.["7day"] || 0,
+      };
+    });
 
   return NextResponse.json(nftData, { status: 200 });
 }
