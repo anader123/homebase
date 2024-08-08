@@ -15,7 +15,7 @@ export default function SpeedTracer() {
   return (
     <main className="flex flex-col bg-darkgray p-6 rounded-md">
       <h2 className="mb-2 text-xl">SpeedTracer</h2>
-      <div className="p-1 bg-gray-800 border border-gray-700 rounded-md flex justify-center w-full flex-grow">
+      <div className="bg-gray-800 border border-gray-700 rounded-md flex justify-center w-full flex-grow">
         <img src={data.image} alt={data.name} className="rounded-lg w-[62%] " />
       </div>
       <div className="mt-2">

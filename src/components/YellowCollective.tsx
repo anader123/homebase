@@ -25,10 +25,10 @@ export default function YellowCollective() {
           layout="responsive"
           width={400}
           height={400}
-          className="rounded-lg p-2 bg-gray-800 border border-gray-700"
+          className="rounded-lg p-1 bg-gray-800 border border-gray-700"
         />
 
-        <div className="mt-2 w-full">
+        <div className="w-full">
           <div>
             <p>{data.name}</p>
             <p className="text-sm text-gray-400">Current Bid: {ethBid} ETH</p>
