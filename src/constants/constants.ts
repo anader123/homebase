@@ -1,5 +1,5 @@
 export const basePaintStart = "2023-08-09T16:45:00.000Z";
-export const speedTracerStart = "2024-01-09T14:45:00.000Z";
+export const speedTracerStart = "2024-01-09T12:00:00.000Z";
 
 export const addresses: Record<string, `0x${string}`> = {
   speedtracer: "0xaa4d3bc0fc9b7e2e6253ed83efb5dce9a21ae1c9",

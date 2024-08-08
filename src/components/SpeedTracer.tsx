@@ -13,8 +13,8 @@ export default function SpeedTracer() {
   if (error) return <div>Error: Failed to fetch BasePaint</div>;
 
   return (
-    <main className="flex flex-col bg-darkgray p-6 rounded-md">
-      <h2 className="mb-2 text-xl">SpeedTracer</h2>
+    <main className="flex flex-col bg-darkgray p-6 rounded-md gap-4">
+      <h2 className="text-xl">SpeedTracer</h2>
       <div className="bg-gray-800 border border-gray-700 rounded-md flex justify-center w-full flex-grow">
         <img src={data.image} alt={data.name} className="rounded-lg w-[62%] " />
       </div>

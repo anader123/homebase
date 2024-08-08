@@ -18,7 +18,7 @@ export default function YellowCollective() {
   return (
     <main className="flex flex-col bg-darkgray rounded-md">
       <div className="flex flex-col items-start justify-between w-full p-6 flex-grow">
-        <h2 className="mb-2 text-xl">Yellow Collective</h2>
+        <h2 className="text-xl">Yellow Collective</h2>
         <Image
           src={`${data.image}`}
           alt={data.name}

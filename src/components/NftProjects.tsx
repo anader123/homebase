@@ -25,6 +25,7 @@ export default function NftProjects() {
                 <p>Project</p>
               </th>
               <th className="p-2">Floor Price</th>
+              <th className="p-2  hidden sm:table-cell">7d Change</th>
             </tr>
           </thead>
           <tbody>
@@ -47,6 +48,20 @@ export default function NftProjects() {
                 </td>
                 <td className="p-2 text-center">
                   {collection.floorAskPrice.toFixed(3)} ETH
+                </td>
+                <td
+                  className={`p-2 text-center  hidden sm:table-cell ${
+                    collection.weeklyChange < 1
+                      ? "text-red-500"
+                      : "text-green-500"
+                  }`}
+                >
+                  {collection.weeklyChange.toFixed(2) === "1.00"
+                    ? "0.00"
+                    : collection.weeklyChange > 1
+                    ? `+${((collection.weeklyChange - 1) * 100).toFixed(2)}`
+                    : `${((collection.weeklyChange - 1) * 100).toFixed(2)}`}
+                  %
                 </td>
               </tr>
             ))}

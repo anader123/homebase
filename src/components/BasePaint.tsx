@@ -36,7 +36,7 @@ export default function BasePaint() {
   return (
     <main className="flex flex-col bg-darkgray rounded-md">
       <div className="flex flex-col items-start justify-between w-full p-6 flex-grow">
-        <h2 className="mb-2 text-xl">BasePaint</h2>
+        <h2 className="text-xl">BasePaint</h2>
         <Image
           src={data.image}
           alt={data.name}

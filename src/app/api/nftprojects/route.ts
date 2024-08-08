@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { nftAddresses } from "@/constants/constants";
 
 export async function GET(req: NextRequest) {
-  const url = `https://api-base.reservoir.tools/collections/v5?contract=${nftAddresses.join(
+  const url = `https://api-base.reservoir.tools/collections/v5?sortBy=floorAskPrice&contract=${nftAddresses.join(
     "&contract="
   )}`;
 
@@ -20,11 +20,17 @@ export async function GET(req: NextRequest) {
   }
 
   const data = await response.json();
-  const nftData = data.collections.map((collection: any) => ({
-    name: collection.name,
-    floorAskPrice: collection.floorAsk.price.amount.decimal,
-    image: collection.image,
-  }));
+
+  const nftData = data.collections
+    .sort((a: any, b: any) => {
+      return b.floorAsk.price.amount.decimal - a.floorAsk.price.amount.decimal;
+    })
+    .map((collection: any) => ({
+      name: collection.name,
+      floorAskPrice: collection.floorAsk.price.amount.decimal,
+      image: collection.image,
+      weeklyChange: collection.floorSaleChange["7day"],
+    }));
 
   return NextResponse.json(nftData, { status: 200 });
 }

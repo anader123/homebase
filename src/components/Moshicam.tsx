@@ -29,8 +29,8 @@ export default function Moshicam() {
   if (error) return <div>Error: Failed to fetch Moshicam</div>;
 
   return (
-    <main className="flex flex-col bg-darkgray p-6 rounded-md">
-      <h2 className="mb-2 text-xl">Moshicam</h2>
+    <main className="flex flex-col bg-darkgray p-6 rounded-md gap-2">
+      <h2 className="text-xl">Moshicam</h2>
       <div className="rounded-md flex-grow">
         <img
           src={data.previews.image_medium_url}

@@ -68,8 +68,8 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-4 sm:gap-x-6 w-full gap-y-6 sm:gap-y-0">
             <SpeedTracer />
             <BasePaint />
-            <Moshicam />
             <YellowCollective />
+            <Moshicam />
           </div>
           <TopBounties />
         </div>
