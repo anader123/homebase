@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { nftAddresses } from "@/constants/constants";
+import { NFT_ADDRESSES } from "@/constants/constants";
 
 export async function GET(req: NextRequest) {
-  const url = `https://api-base.reservoir.tools/collections/v5?sortBy=floorAskPrice&contract=${nftAddresses.join(
+  const url = `https://api-base.reservoir.tools/collections/v5?sortBy=floorAskPrice&contract=${NFT_ADDRESSES.join(
     "&contract="
   )}`;
 

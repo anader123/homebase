@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { speedTracerStart } from "@/constants/constants";
-import { addresses } from "@/constants/constants";
+import { SPEEDTRACER_START } from "@/constants/constants";
+import { CONTRACT_ADDRESSES } from "@/constants/constants";
 
 export async function GET(req: NextRequest) {
   const calcToday = (startDate: Date, endDate: Date) => {
@@ -8,13 +8,13 @@ export async function GET(req: NextRequest) {
     return Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
   };
 
-  const today = calcToday(new Date(speedTracerStart), new Date());
+  const today = calcToday(new Date(SPEEDTRACER_START), new Date());
 
   const leaderboardResponse = await fetch(
     `https://www.speedtracer.xyz/api/leaderboard?address=undefined&track=${today}`
   );
 
-  const tokenUrl = `https://api-base.reservoir.tools/tokens/v7?tokens=${addresses.speedtracer}:${today}`;
+  const tokenUrl = `https://api-base.reservoir.tools/tokens/v7?tokens=${CONTRACT_ADDRESSES.speedtracer}:${today}`;
   const tokenResponse = await fetch(tokenUrl, {
     headers: {
       "x-api-key": process.env.NEXT_PUBLIC_RESERVOIR_API_KEY!,

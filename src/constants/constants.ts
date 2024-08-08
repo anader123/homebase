@@ -1,15 +1,22 @@
-export const basePaintStart = "2023-08-09T16:45:00.000Z";
-export const speedTracerStart = "2024-01-09T12:00:00.000Z";
+import classNames from "classnames";
 
-export const addresses: Record<string, `0x${string}`> = {
+export const BASEPAINT_START = "2023-08-09T16:45:00.000Z";
+export const SPEEDTRACER_START = "2024-01-09T12:00:00.000Z";
+
+export const BUTTON_CLASS = classNames(
+  "bg-blue-600 px-4 py-2 rounded-md w-full border-white hover:opacity-70 mt-4"
+);
+
+export const CONTRACT_ADDRESSES: Record<string, `0x${string}`> = {
   speedtracer: "0xaa4d3bc0fc9b7e2e6253ed83efb5dce9a21ae1c9",
   basepaint: "0xba5e05cb26b78eda3a2f8e3b3814726305dcac83",
   basepaintRewards: "0xaff1A9E200000061fC3283455d8B0C7e3e728161",
+  yellowcollectiveAuction: "0xf958872ceb73ba7d0aca0c7a9905119bcb371dec",
 };
 
-export const speedtracerAddress = "0xaa4d3bc0fc9b7e2e6253ed83efb5dce9a21ae1c9";
+export const STALE_TIME = 1000 * 60 * 10; // 10 mins
 
-export const nftAddresses = [
+export const NFT_ADDRESSES = [
   "0xa449b4f43d9a33fcdcf397b9cc7aa909012709fd",
   "0xcb28749c24af4797808364d71d71539bc01e76d4",
   "0x13dc8261fce63499aa25deb512bb1827b411b83b",
@@ -17,7 +24,7 @@ export const nftAddresses = [
   "0x2d53d0545cd1275b69040e3c50587e2cc4443a52",
 ];
 
-export const abis = {
+export const ABIS = {
   basepaint: [
     {
       inputs: [],
@@ -70,9 +77,18 @@ export const abis = {
       type: "function",
     },
   ],
+  yellowcollectiveAuction: [
+    {
+      inputs: [{ internalType: "uint256", name: "_tokenId", type: "uint256" }],
+      name: "createBid",
+      outputs: [],
+      stateMutability: "payable",
+      type: "function",
+    },
+  ],
 };
 
-export const memeCoins = [
+export const MEMECOINS = [
   {
     name: "Brett",
     coingeckoName: "based-brett",
@@ -105,7 +121,7 @@ export const memeCoins = [
   },
 ];
 
-export const nftProjects = [
+export const NFT_PROJECTS = [
   {
     name: "Onchain Gaias",
     address: "",

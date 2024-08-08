@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { memeCoins } from "@/constants/constants";
+import { MEMECOINS } from "@/constants/constants";
 
 export async function GET(req: NextRequest) {
   const param = "based-brett,degen-base,toshi,higher,mfercoin";
@@ -20,16 +20,14 @@ export async function GET(req: NextRequest) {
 
     const data = await coins.json();
 
-    const updatedMemeCoins = memeCoins
-      .map((coin) => {
-        return {
-          ...coin,
-          priceData: data[coin.coingeckoName],
-        };
-      })
-      .sort((a, b) => {
-        return b.priceData.usd_market_cap - a.priceData.usd_market_cap;
-      });
+    const updatedMemeCoins = MEMECOINS.map((coin) => {
+      return {
+        ...coin,
+        priceData: data[coin.coingeckoName],
+      };
+    }).sort((a, b) => {
+      return b.priceData.usd_market_cap - a.priceData.usd_market_cap;
+    });
 
     return NextResponse.json(updatedMemeCoins, { status: 200 });
   } catch (error) {

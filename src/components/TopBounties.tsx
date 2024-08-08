@@ -2,11 +2,13 @@
 import { apiFetcher } from "@/utils/fetchers";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import { STALE_TIME } from "@/constants/constants";
 
 export default function TopBounties() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["fetchTopBounties"],
     queryFn: () => apiFetcher("bounties"),
+    staleTime: STALE_TIME,
   });
 
   if (isLoading) return <></>;

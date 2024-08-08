@@ -1,11 +1,13 @@
 "use client";
 import { apiFetcher } from "@/utils/fetchers";
 import { useQuery } from "@tanstack/react-query";
+import { STALE_TIME } from "@/constants/constants";
 
 export default function NetworkStats() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["fetchNetworkStats"],
     queryFn: () => apiFetcher("networkstats"),
+    staleTime: STALE_TIME,
   });
 
   const formattedTvl = (parseFloat(data?.tvlUsd) / 1e9).toFixed(2);

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { formatUnits } from "viem";
 
 export async function GET(req: NextRequest) {
   const auction = await fetch(
@@ -20,13 +21,15 @@ export async function GET(req: NextRequest) {
 
   const tokenData = await token.json();
 
+  const ethBid = formatUnits(BigInt(parseInt(auctionData.highestBid, 16)), 18);
+
   return NextResponse.json(
     {
       tokenId: parseInt(auctionData.tokenId, 16),
       name: `Collective Noun #${parseInt(auctionData.tokenId, 16)}`,
       image: tokenData.image,
       highestBidder: auctionData.highestBidder,
-      highestBid: auctionData.highestBid,
+      highestEthBid: ethBid,
     },
     { status: 200 }
   );

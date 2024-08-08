@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { basePaintStart } from "@/constants/constants";
+import { BASEPAINT_START } from "@/constants/constants";
 
 export async function GET(req: NextRequest) {
   const calcToday = (startDate: Date, endDate: Date) => {
@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
     return Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
   };
 
-  const today = calcToday(new Date(basePaintStart), new Date());
+  const today = calcToday(new Date(BASEPAINT_START), new Date());
 
   const response = await fetch(
     `https://basepaint.xyz/api/art/${today.toString(16)}`

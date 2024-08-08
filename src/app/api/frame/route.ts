@@ -4,7 +4,7 @@ import {
   FrameRequest,
 } from "@coinbase/onchainkit/frame";
 import { NextRequest, NextResponse } from "next/server";
-import { basePaintStart } from "@/constants/constants";
+import { BASEPAINT_START } from "@/constants/constants";
 
 const fetchInternalData = async (path: string) => {
   const response = await fetch(
@@ -42,7 +42,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       return Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
     };
 
-    const today = calcToday(new Date(basePaintStart), new Date());
+    const today = calcToday(new Date(BASEPAINT_START), new Date());
     return new NextResponse(
       getFrameHtmlResponse({
         buttons: [

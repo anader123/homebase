@@ -2,11 +2,13 @@
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { apiFetcher } from "@/utils/fetchers";
+import { STALE_TIME } from "@/constants/constants";
 
 export default function NftProjects() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["fetchNftProjects"],
     queryFn: () => apiFetcher("nftprojects"),
+    staleTime: STALE_TIME,
   });
 
   if (isLoading) return <></>;

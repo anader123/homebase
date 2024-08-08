@@ -14,12 +14,8 @@ import {
   EthBalance,
 } from "@coinbase/onchainkit/identity";
 import { color } from "@coinbase/onchainkit/theme";
-import classNames from "classnames";
 import { useAccount } from "wagmi";
-
-const BUTTON_CLASS = classNames(
-  "bg-blue-600 px-4 py-2 rounded-md w-full border-white hover:opacity-70 mt-4"
-);
+import { BUTTON_CLASS } from "@/constants/constants";
 
 const WalletComponents: React.FC = () => {
   const { isConnected } = useAccount();
