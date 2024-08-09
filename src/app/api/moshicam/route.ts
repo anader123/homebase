@@ -40,7 +40,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         {
           action: "tx",
           label: `Mint Moshicam`,
-          target: "",
+          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/mint`,
         },
       ],
       image: {
