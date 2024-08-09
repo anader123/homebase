@@ -44,7 +44,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         },
       ],
       image: {
-        src: `${randomMint.image}`,
+        src: `${randomMint.previews.image_medium_url}`,
       },
       postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
     })
