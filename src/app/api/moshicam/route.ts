@@ -3,7 +3,12 @@ import {
   getFrameHtmlResponse,
   getFrameMessage,
   FrameRequest,
+  FrameTransactionResponse,
+  FrameValidationData,
 } from "@coinbase/onchainkit/frame";
+import { encodeFunctionData, parseEther } from "viem";
+import { ABIS } from "@/constants/constants";
+import { base } from "viem/chains";
 
 export async function GET(req: NextRequest) {
   const data = await fetchLatestMoshi();
@@ -21,6 +26,35 @@ export async function POST(req: NextRequest): Promise<Response> {
     return new NextResponse("Message not valid", { status: 500 });
   }
 
+  const url = new URL(frameRequest.untrustedData.url);
+  const isMint = url.searchParams.get("mint");
+
+  if (isMint === "true") {
+    const contractAddress =
+      (url.searchParams.get("contract") as `0x${string}`) ||
+      ("0x" as `0x${string}`);
+    const tokenId = url.searchParams.get("token");
+
+    return getMintResponse(message, Number(tokenId), contractAddress);
+  } else {
+    return getDefaultResponse();
+  }
+}
+
+async function fetchLatestMoshi() {
+  const response = await fetch(
+    `https://api.moshi.cam/api/v1/feed/latest-mints?last=20`
+  );
+
+  if (!response.ok) {
+    return { error: "Error fetching data", status: response.status };
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+async function getDefaultResponse(): Promise<Response> {
   const data = await fetchLatestMoshi();
   const randomIndex = Math.floor(Math.random() * 20);
   const randomMint = data.tokens[randomIndex];
@@ -40,7 +74,8 @@ export async function POST(req: NextRequest): Promise<Response> {
         {
           action: "tx",
           label: `Mint`,
-          target: `eip115:8453:${randomMint.contract_address}:${randomMint.token_id}`,
+          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/moshicam?mint=true&contract=${data.contract_address}&token=${data.token_id}`,
+          postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx-success`,
         },
       ],
       image: {
@@ -52,15 +87,31 @@ export async function POST(req: NextRequest): Promise<Response> {
   );
 }
 
-async function fetchLatestMoshi() {
-  const response = await fetch(
-    `https://api.moshi.cam/api/v1/feed/latest-mints?last=20`
-  );
+async function getMintResponse(
+  message: FrameValidationData,
+  tokenId: number,
+  contractAddress: `0x${string}`
+): Promise<Response> {
+  const userAddress = message.address
+    ? message.address
+    : message.interactor?.verified_addresses?.eth_addresses?.[0] ||
+      message.interactor?.custody_address;
 
-  if (!response.ok) {
-    return { error: "Error fetching data", status: response.status };
-  }
+  const data = encodeFunctionData({
+    abi: ABIS.moshicam,
+    functionName: "collect",
+    args: [userAddress, tokenId, 1],
+  });
 
-  const data = await response.json();
-  return data;
+  const txData: FrameTransactionResponse = {
+    chainId: `eip155:${base.id}`,
+    method: "eth_sendTransaction",
+    params: {
+      abi: [],
+      data,
+      to: contractAddress,
+      value: parseEther("0.0001").toString(),
+    },
+  };
+  return NextResponse.json(txData);
 }

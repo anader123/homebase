@@ -6,8 +6,8 @@ import {
 import { NextRequest, NextResponse } from "next/server";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-  const body: FrameRequest = await req.json();
-  const { isValid } = await getFrameMessage(body);
+  const frameRequest: FrameRequest = await req.json();
+  const { isValid } = await getFrameMessage(frameRequest);
 
   if (!isValid) {
     return new NextResponse("Message not valid", { status: 500 });
@@ -25,13 +25,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           action: "link",
           label: "View Tx",
           target: `https://base.blockscout.com/tx/${
-            body?.untrustedData?.transactionId || "--"
+            frameRequest?.untrustedData?.transactionId || "--"
           }`,
         },
       ],
-      image: {
-        src: `${process.env.NEXT_PUBLIC_BASE_URL}/tx-success.png`,
-      },
+      image: `${process.env.NEXT_PUBLIC_BASE_URL}/tx-success.png`,
     })
   );
 }

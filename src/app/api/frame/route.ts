@@ -4,7 +4,6 @@ import {
   FrameRequest,
 } from "@coinbase/onchainkit/frame";
 import { NextRequest, NextResponse } from "next/server";
-import { BASEPAINT_START } from "@/constants/constants";
 
 const fetchInternalData = async (path: string) => {
   const response = await fetch(
@@ -47,7 +46,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         },
         {
           action: "post",
-          label: "Random Moshicam",
+          label: "Moshicam",
           target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/moshicam`,
         },
       ],

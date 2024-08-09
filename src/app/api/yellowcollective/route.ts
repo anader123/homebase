@@ -4,7 +4,12 @@ import {
   getFrameHtmlResponse,
   getFrameMessage,
   FrameRequest,
+  FrameValidationData,
+  FrameTransactionResponse,
 } from "@coinbase/onchainkit/frame";
+import { base } from "viem/chains";
+import { encodeFunctionData, parseEther } from "viem";
+import { CONTRACT_ADDRESSES, ABIS } from "@/constants/constants";
 
 export async function GET(req: NextRequest) {
   const data = await fetchAuctionData();
@@ -24,6 +29,41 @@ export async function POST(req: NextRequest): Promise<Response> {
     return new NextResponse("Message not valid", { status: 500 });
   }
 
+  const url = new URL(frameRequest.untrustedData.url);
+  const isMint = url.searchParams.get("mint");
+
+  if (isMint === "true") {
+    return getMintResponse(message);
+  } else {
+    return getDefaultResponse();
+  }
+}
+
+async function getMintResponse(
+  message: FrameValidationData
+): Promise<NextResponse> {
+  const data = encodeFunctionData({
+    abi: ABIS.yellowcollectiveAuction,
+    functionName: "createBid",
+    args: [],
+  });
+
+  const bid = message.input || "0";
+
+  const txData: FrameTransactionResponse = {
+    chainId: `eip155:${base.id}`,
+    method: "eth_sendTransaction",
+    params: {
+      abi: [],
+      data,
+      to: CONTRACT_ADDRESSES.yellowcollectiveAuction,
+      value: parseEther(bid).toString(),
+    },
+  };
+  return NextResponse.json(txData);
+}
+
+async function getDefaultResponse() {
   const data = await fetchAuctionData();
 
   if (data.error) {
@@ -40,8 +80,9 @@ export async function POST(req: NextRequest): Promise<Response> {
         },
         {
           action: "tx",
-          label: `Bid YC Noun #${data.tokenId}`,
-          target: "https://basepaint.xyz/mint",
+          label: `Bid Noun #${data.tokenId}`,
+          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/yellowcollective?mint=true`,
+          postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx-success`,
         },
       ],
       image: {

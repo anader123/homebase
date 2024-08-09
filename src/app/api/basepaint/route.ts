@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { BASEPAINT_START } from "@/constants/constants";
+import {
+  BASEPAINT_START,
+  CONTRACT_ADDRESSES,
+  ABIS,
+} from "@/constants/constants";
 import {
   getFrameHtmlResponse,
   getFrameMessage,
   FrameRequest,
+  FrameTransactionResponse,
+  FrameValidationData,
 } from "@coinbase/onchainkit/frame";
+import { base } from "viem/chains";
+import { encodeFunctionData, parseEther, zeroAddress } from "viem";
 
 export async function GET(req: NextRequest) {
   const today = calcToday(new Date(BASEPAINT_START), new Date());
@@ -32,6 +40,17 @@ export async function POST(req: NextRequest): Promise<Response> {
     return new NextResponse("Message not valid", { status: 500 });
   }
 
+  const url = new URL(frameRequest.untrustedData.url);
+  const isMint = url.searchParams.get("mint");
+
+  if (isMint === "true") {
+    return getMintResponse(message);
+  } else {
+    return getDefaultResponse();
+  }
+}
+
+async function getDefaultResponse(): Promise<NextResponse> {
   const today = calcToday(new Date(BASEPAINT_START), new Date());
   return new NextResponse(
     getFrameHtmlResponse({
@@ -44,7 +63,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         {
           action: "tx",
           label: `Mint Day #${today}`,
-          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx`,
+          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/basepaint?mint=true`,
           postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx-success`,
         },
       ],
@@ -55,6 +74,33 @@ export async function POST(req: NextRequest): Promise<Response> {
       postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
     })
   );
+}
+
+async function getMintResponse(
+  message: FrameValidationData
+): Promise<NextResponse> {
+  const userAddress = message.address
+    ? message.address
+    : message.interactor?.verified_addresses?.eth_addresses?.[0] ||
+      message.interactor?.custody_address;
+
+  const data = encodeFunctionData({
+    abi: ABIS.basepaint,
+    functionName: "mintLatest",
+    args: [userAddress, 1, zeroAddress],
+  });
+
+  const txData: FrameTransactionResponse = {
+    chainId: `eip155:${base.id}`,
+    method: "eth_sendTransaction",
+    params: {
+      abi: [],
+      data,
+      to: CONTRACT_ADDRESSES.basepaintRewards,
+      value: parseEther("0.0026").toString(),
+    },
+  };
+  return NextResponse.json(txData);
 }
 
 const calcToday = (startDate: Date, endDate: Date) => {
