@@ -7,11 +7,6 @@ import {
 } from "@coinbase/onchainkit/frame";
 
 export async function GET(req: NextRequest) {
-  const calcToday = (startDate: Date, endDate: Date) => {
-    const differenceInMs = endDate.getTime() - startDate.getTime();
-    return Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
-  };
-
   const today = calcToday(new Date(BASEPAINT_START), new Date());
 
   const response = await fetch(
@@ -37,11 +32,6 @@ export async function POST(req: NextRequest): Promise<Response> {
     return new NextResponse("Message not valid", { status: 500 });
   }
 
-  const calcToday = (startDate: Date, endDate: Date) => {
-    const differenceInMs = endDate.getTime() - startDate.getTime();
-    return Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
-  };
-
   const today = calcToday(new Date(BASEPAINT_START), new Date());
   return new NextResponse(
     getFrameHtmlResponse({
@@ -65,3 +55,8 @@ export async function POST(req: NextRequest): Promise<Response> {
     })
   );
 }
+
+const calcToday = (startDate: Date, endDate: Date) => {
+  const differenceInMs = endDate.getTime() - startDate.getTime();
+  return Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+};

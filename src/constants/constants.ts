@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-export const BASEPAINT_START = "2023-08-09T16:45:00.000Z";
+export const BASEPAINT_START = "2023-08-09T16:42:00.000Z";
 export const SPEEDTRACER_START = "2024-01-09T12:00:00.000Z";
 
 export const BUTTON_CLASS = classNames(

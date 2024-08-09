@@ -42,17 +42,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         },
         {
           action: "post",
-          label: "Trending Mint",
-          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/trendingmints`,
-        },
-        {
-          action: "post",
           label: "Yellow Collective Auction",
           target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/yellowcollective`,
         },
         {
           action: "post",
-          label: "Moshicam",
+          label: "Random Moshicam",
           target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/moshicam`,
         },
       ],
