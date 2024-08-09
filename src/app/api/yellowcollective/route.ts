@@ -29,8 +29,8 @@ export async function POST(req: NextRequest): Promise<Response> {
     return new NextResponse("Message not valid", { status: 500 });
   }
 
-  const url = new URL(frameRequest.untrustedData.url);
-  const isMint = url.searchParams.get("mint");
+  const searchParams = req.nextUrl.searchParams;
+  const isMint = searchParams.get("mint");
 
   if (isMint === "true") {
     return getMintResponse(message);

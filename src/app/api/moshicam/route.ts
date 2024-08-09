@@ -26,14 +26,14 @@ export async function POST(req: NextRequest): Promise<Response> {
     return new NextResponse("Message not valid", { status: 500 });
   }
 
-  const url = new URL(frameRequest.untrustedData.url);
-  const isMint = url.searchParams.get("mint");
+  const searchParams = req.nextUrl.searchParams;
+  const isMint = searchParams.get("mint");
 
   if (isMint === "true") {
     const contractAddress =
-      (url.searchParams.get("contract") as `0x${string}`) ||
+      (searchParams.get("contract") as `0x${string}`) ||
       ("0x" as `0x${string}`);
-    const tokenId = url.searchParams.get("token");
+    const tokenId = searchParams.get("token");
 
     return getMintResponse(message, Number(tokenId), contractAddress);
   } else {
@@ -70,11 +70,6 @@ async function getDefaultResponse(): Promise<Response> {
           action: "post",
           label: "Back",
           target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
-        },
-        {
-          action: "mint",
-          label: `Mint`,
-          target: `eip155:${base.id}:${randomMint.contract_address}:${randomMint.token_id}`,
         },
         {
           action: "tx",
@@ -118,5 +113,6 @@ async function getMintResponse(
       value: parseEther("0.0001").toString(),
     },
   };
+
   return NextResponse.json(txData);
 }
