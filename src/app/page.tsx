@@ -14,12 +14,16 @@ import SpeedTracer from "@/components/SpeedTracer";
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
+      action: "post",
       label: "BasePaint",
+      target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/basepaint`,
     },
     {
+      action: "post",
       label: "Trending Mint",
     },
     {
+      action: "post",
       label: "Yellow Collective Auction",
     },
   ],
