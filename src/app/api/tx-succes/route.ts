@@ -17,6 +17,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     getFrameHtmlResponse({
       buttons: [
         {
+          action: "post",
+          label: "Home",
+          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
+        },
+        {
           action: "link",
           label: "View Tx",
           target: `https://base.blockscout.com/tx/${
@@ -25,7 +30,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         },
       ],
       image: {
-        src: `${process.env.NEXT_PUBLIC_BASE_URL}/og-image.png`,
+        src: `${process.env.NEXT_PUBLIC_BASE_URL}/tx-success.png`,
       },
     })
   );
