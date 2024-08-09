@@ -79,7 +79,7 @@ async function getDefaultResponse(): Promise<Response> {
         },
       ],
       image: {
-        src: `${randomMint.previews.image_medium_url}`,
+        src: `${randomMint.previews.image_opengraph_url}`,
         aspectRatio: "1:1",
       },
       postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,

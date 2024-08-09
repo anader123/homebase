@@ -41,7 +41,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         },
         {
           action: "post",
-          label: "Yellow Collective Auction",
+          label: "Yellow Collective",
           target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/yellowcollective`,
         },
         {
