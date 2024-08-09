@@ -29,13 +29,9 @@ export async function GET(req: NextRequest) {
   return NextResponse.json(data, { status: 200 });
 }
 
-async function getResponse(req: NextRequest): Promise<NextResponse> {
-  const allowFramegear = process.env.NEXT_PUBLIC_NODE_ENV !== "production";
-
+export async function POST(req: NextRequest): Promise<Response> {
   const frameRequest: FrameRequest = await req.json();
-  const { isValid, message } = await getFrameMessage(frameRequest, {
-    allowFramegear,
-  });
+  const { isValid, message } = await getFrameMessage(frameRequest);
 
   if (!isValid) {
     return new NextResponse("Message not valid", { status: 500 });
@@ -51,8 +47,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     getFrameHtmlResponse({
       buttons: [
         {
+          action: "post",
+          label: "Back",
+          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
+        },
+        {
           action: "link",
-          label: `Mint #${today}`,
+          label: `Mint BasePaint Day #${today}`,
           target: "https://basepaint.xyz/mint",
         },
       ],
@@ -60,11 +61,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         src: `https://basepaint.xyz/api/art/image?day=${today}`,
         aspectRatio: "1:1",
       },
-      postUrl: "https://build-onchain-apps.vercel.app/api/frame",
+      postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
     })
   );
-}
-
-export async function POST(req: NextRequest): Promise<Response> {
-  return getResponse(req);
 }

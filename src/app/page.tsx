@@ -21,10 +21,17 @@ const frameMetadata = getFrameMetadata({
     {
       action: "post",
       label: "Trending Mint",
+      target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/trendingmints`,
     },
     {
       action: "post",
       label: "Yellow Collective Auction",
+      target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/yellowcollective`,
+    },
+    {
+      action: "post",
+      label: "Moshicam",
+      target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/moshicam`,
     },
   ],
   image: `${process.env.NEXT_PUBLIC_BASE_URL}/og-image.png`,
