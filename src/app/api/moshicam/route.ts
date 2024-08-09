@@ -74,7 +74,7 @@ async function getDefaultResponse(): Promise<Response> {
         {
           action: "tx",
           label: `Mint`,
-          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/moshicam?mint=true&contract=${data.contract_address}&token=${data.token_id}`,
+          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/moshicam?mint=true&contract=${randomMint.contract_address}&token=${randomMint.token_id}`,
           postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx-success`,
         },
       ],
