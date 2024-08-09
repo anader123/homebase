@@ -39,12 +39,13 @@ export async function POST(req: NextRequest): Promise<Response> {
         },
         {
           action: "tx",
-          label: `Mint Moshicam`,
-          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/mint`,
+          label: `Mint`,
+          target: `eip115:8453:${randomMint.contract_address}:${randomMint.token_id}`,
         },
       ],
       image: {
         src: `${randomMint.previews.image_medium_url}`,
+        aspectRatio: "1:1",
       },
       postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
     })
