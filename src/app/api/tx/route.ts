@@ -24,7 +24,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   const data = encodeFunctionData({
     abi: ABIS.basepaint,
     functionName: "mintLatest",
-    args: [userAddress, "1", zeroAddress],
+    args: [userAddress, 1, zeroAddress],
   });
 
   const txData: FrameTransactionResponse = {
@@ -34,7 +34,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
       abi: [],
       data,
       to: CONTRACT_ADDRESSES.basepaintRewards,
-      value: parseEther("0.00026").toString(),
+      value: parseEther("0.0026").toString(),
     },
   };
   return NextResponse.json(txData);

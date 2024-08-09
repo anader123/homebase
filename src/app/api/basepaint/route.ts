@@ -43,7 +43,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         },
         {
           action: "tx",
-          label: `Mint BasePaint Day #${today}`,
+          label: `Mint Day #${today}`,
           target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx`,
           postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx-success`,
         },
