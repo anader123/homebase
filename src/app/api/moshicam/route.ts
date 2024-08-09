@@ -72,14 +72,19 @@ async function getDefaultResponse(): Promise<Response> {
           target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
         },
         {
-          action: "tx",
+          action: "mint",
           label: `Mint`,
+          target: `eip155:${base.id}:${randomMint.contract_address}:${randomMint.token_id}`,
+        },
+        {
+          action: "tx",
+          label: `Mint in Wallet`,
           target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/moshicam?mint=true&contract=${randomMint.contract_address}&token=${randomMint.token_id}`,
           postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx-success`,
         },
       ],
       image: {
-        src: `${randomMint.previews.image_opengraph_url}`,
+        src: `https://moshi.cam/api/og?imageUrl=${randomMint.previews.image_opengraph_url}&useSquareAspectRatio=1&bg=dark`,
         aspectRatio: "1:1",
       },
       postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
