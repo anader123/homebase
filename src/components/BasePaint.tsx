@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Modal } from "./Modal";
 import { ABIS, CONTRACT_ADDRESSES, STALE_TIME } from "@/constants/constants";
 import { BUTTON_CLASS } from "@/constants/constants";
+import LoadingMessage from "./LoadingAnimation";
 import ErrorMessage from "./ErrorMessage";
 
 export default function BasePaint() {
@@ -19,7 +20,7 @@ export default function BasePaint() {
     staleTime: STALE_TIME,
   });
 
-  if (isLoading) return <div className="w-full"></div>;
+  if (isLoading) return <LoadingMessage />;
   if (error || !data) return <ErrorMessage name={"BasePaint"} />;
 
   const theme = data.attributes.filter((x: { trait_type: string }) => {

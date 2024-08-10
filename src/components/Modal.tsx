@@ -194,7 +194,10 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
                     title={write.error ? write.error.message : undefined}
                     className="text-red-500 font-roboto text-xs max-w-sm line-clamp-2"
                   >
-                    {notEnoughBalance && "Not enough ETH in your wallet"}
+                    {notEnoughBalance &&
+                      `Not enough ETH in your wallet. Balance: ${
+                        ethBalance?.data?.decimals ?? BigInt(0)
+                      } ETH`}
                     {!isBidValid && "Your bid must be higher by 10%"}
                     {write.error &&
                       !notEnoughBalance &&

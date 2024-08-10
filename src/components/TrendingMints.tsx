@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { apiFetcher } from "@/utils/fetchers";
 import { STALE_TIME } from "@/constants/constants";
+import LoadingAnimation from "./LoadingAnimation";
 import ErrorMessage from "./ErrorMessage";
 
 export default function TrendingMints() {
@@ -12,7 +13,7 @@ export default function TrendingMints() {
     staleTime: STALE_TIME,
   });
 
-  if (isLoading) return <div className="w-full"></div>;
+  if (isLoading) return <LoadingAnimation isBig={true} />;
   if (error || !data) return <ErrorMessage name={"Trending Mints"} />;
 
   return (

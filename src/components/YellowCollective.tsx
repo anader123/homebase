@@ -6,6 +6,7 @@ import { ABIS, CONTRACT_ADDRESSES, STALE_TIME } from "@/constants/constants";
 import { useState } from "react";
 import { Modal } from "./Modal";
 import { BUTTON_CLASS } from "@/constants/constants";
+import LoadingAnimation from "./LoadingAnimation";
 import ErrorMessage from "./ErrorMessage";
 
 export default function YellowCollective() {
@@ -20,7 +21,7 @@ export default function YellowCollective() {
     staleTime: STALE_TIME,
   });
 
-  if (isLoading) return <></>;
+  if (isLoading) return <LoadingAnimation />;
   if (error || !data) return <ErrorMessage name={"Yellow Collective"} />;
 
   return (

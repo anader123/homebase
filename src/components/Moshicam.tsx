@@ -5,7 +5,8 @@ import { apiFetcher } from "@/utils/fetchers";
 import { useState } from "react";
 import { Modal } from "./Modal";
 import { ABIS, STALE_TIME } from "@/constants/constants";
-import { BUTTON_CLASS } from "@/constants/constants";
+import LoadingAnimation from "./LoadingAnimation";
+import ErrorMessage from "./ErrorMessage";
 
 export default function Moshicam() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -19,13 +20,8 @@ export default function Moshicam() {
     staleTime: STALE_TIME,
   });
 
-  if (isLoading) return <></>;
-  if (error || !data)
-    return (
-      <div className="w-full bg-darkgray p-6 rounded-md flex justify-center items-center h-full border-2 border-gray-700">
-        <span className="mt-2">Error: Failed to fetch SpeedTracer</span>
-      </div>
-    );
+  if (isLoading) return <LoadingAnimation />;
+  if (error || !data) return <ErrorMessage name={"Moshicam"} />;
 
   return (
     <main className="flex flex-col bg-darkgray p-6 rounded-md gap-2">

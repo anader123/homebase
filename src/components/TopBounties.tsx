@@ -3,6 +3,7 @@ import { apiFetcher } from "@/utils/fetchers";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { STALE_TIME } from "@/constants/constants";
+import LoadingAnimation from "./LoadingAnimation";
 import ErrorMessage from "./ErrorMessage";
 
 export default function TopBounties() {
@@ -12,7 +13,7 @@ export default function TopBounties() {
     staleTime: STALE_TIME,
   });
 
-  if (isLoading) return <></>;
+  if (isLoading) return <LoadingAnimation isBig={true} />;
   if (error || !data) return <ErrorMessage name={"Bounty Caster"} />;
 
   return (
@@ -23,7 +24,7 @@ export default function TopBounties() {
           return (
             <a
               href={`https://www.bountycaster.xyz/bounty/${bounty.platform.hash}`}
-              className="block bg-gray-800 p-2 rounded-md w-full hover:opacity-80"
+              className="block bg-gray-800 p-2 rounded-md hover:opacity-80"
               key={`key-${bounty.title}`}
               target="_blank"
               rel="noopener noreferrer"
