@@ -84,12 +84,12 @@ async function getDefaultResponse() {
           label: "Back",
           target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
         },
-        // {
-        //   action: "tx",
-        //   label: `Bid on Noun #${data.tokenId}`,
-        //   target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/yellowcollective?bid=true&tokenId=${data.tokenId}&currentBid=${data.highestEthBid}`,
-        //   postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx-success`,
-        // },
+        {
+          action: "tx",
+          label: `Bid on Noun #${data.tokenId}`,
+          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/yellowcollective?bid=true&tokenId=${data.tokenId}&currentBid=${data.highestEthBid}`,
+          postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx-success`,
+        },
       ],
       image: {
         src: `${data.image}`,
