@@ -20,7 +20,8 @@ export default function YellowCollective() {
   });
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: Failed to fetch Yellow Collective</div>;
+  if (error || !data)
+    return <div>Error: Failed to fetch Yellow Collective</div>;
 
   return (
     <main className="flex flex-col bg-darkgray rounded-md">

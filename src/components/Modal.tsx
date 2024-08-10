@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import Stepper from "./Stepper";
-import { useReadContract, useWriteContract, useAccount } from "wagmi";
+import {
+  useReadContract,
+  useWriteContract,
+  useAccount,
+  useBalance,
+} from "wagmi";
 import { CONTRACT_ADDRESSES } from "@/constants/constants";
 import { formatEther, zeroAddress, parseEther } from "viem";
 import { ConnectWallet } from "@coinbase/onchainkit/wallet";
@@ -29,6 +34,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
   const [isBidValid, setIsBidValid] = useState(true);
   const write = useWriteContract();
   const { isConnected, address } = useAccount();
+  const ethBalance = useBalance({ address, query: { enabled: !!address } });
   const isMint =
     details.writeAddress !== CONTRACT_ADDRESSES.yellowcollectiveAuction;
 
@@ -40,6 +46,12 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
       enabled: !!details.readFunctionName,
     },
   });
+
+  const value = isMint
+    ? BigInt((price.data as string) ?? "0") * BigInt(howMany)
+    : parseEther(howMuch || "0");
+
+  const notEnoughBalance = value > (ethBalance?.data?.value ?? BigInt(0));
 
   let args: any[];
   if (details.writeAddress === CONTRACT_ADDRESSES.basepaintRewards) {
@@ -131,11 +143,6 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
                     <span className="text-sm text-gray-400">
                       Highest Bid: {details.highestEthBid} ETH
                     </span>
-                    {!isBidValid && (
-                      <span className="text-sm text-red-500 w-full text-center">
-                        Your bid must be higher by 10%
-                      </span>
-                    )}
                   </div>
                 )}
                 {write.isSuccess && (
@@ -159,10 +166,6 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
               {isConnected ? (
                 <button
                   onClick={() => {
-                    const value = isMint
-                      ? BigInt((price.data as string) ?? "0") * BigInt(howMany)
-                      : parseEther(howMuch || "0");
-
                     write.writeContract({
                       address: details.writeAddress,
                       abi: details.abi,
@@ -171,8 +174,8 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
                       value,
                     });
                   }}
-                  className={`${BUTTON_CLASS}`}
-                  disabled={isMint ? false : !isBidValid}
+                  className={`${BUTTON_CLASS} disabled:bg-gray-400 disabled:cursor-not-allowed`}
+                  disabled={!isBidValid || notEnoughBalance}
                 >
                   {details.writeAddress !==
                   CONTRACT_ADDRESSES.yellowcollectiveAuction
@@ -186,12 +189,17 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
               )}
 
               <div className="w-full flex flex-col items-center justify-center mt-2 gap-2">
-                {write.error && (
+                {(notEnoughBalance || write.error || !isBidValid) && (
                   <div
-                    title={write.error.message}
+                    title={write.error ? write.error.message : undefined}
                     className="text-red-500 font-roboto text-xs max-w-sm line-clamp-2"
                   >
-                    {toHumanErrorMessage(write.error.message)}
+                    {notEnoughBalance && "Not enough ETH in your wallet"}
+                    {!isBidValid && "Your bid must be higher by 10%"}
+                    {write.error &&
+                      !notEnoughBalance &&
+                      !isBidValid &&
+                      toHumanErrorMessage(write.error.message)}
                   </div>
                 )}
               </div>

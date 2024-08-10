@@ -12,7 +12,7 @@ export default function MemeCoins() {
   });
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: Failed to fetch Memecoins</div>;
+  if (error || !data) return <div>Error: Failed to fetch Memecoins</div>;
 
   return (
     <main className="flex flex-col items-center justify-between p-6 rounded-md bg-darkgray w-full">

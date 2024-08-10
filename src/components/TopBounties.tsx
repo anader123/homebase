@@ -12,7 +12,7 @@ export default function TopBounties() {
   });
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: Failed to fetch Bounties</div>;
+  if (error || !data) return <div>Error: Failed to fetch Bounties</div>;
 
   return (
     <main className="w-full p-6 bg-darkgray rounded-md">

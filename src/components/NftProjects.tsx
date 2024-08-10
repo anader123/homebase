@@ -12,7 +12,7 @@ export default function NftProjects() {
   });
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: NFT Projects</div>;
+  if (error || !data) return <div>Error: NFT Projects</div>;
 
   return (
     <main className="flex flex-col items-center justify-between p-6 rounded-md bg-darkgray w-full">

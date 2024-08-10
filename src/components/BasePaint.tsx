@@ -19,7 +19,7 @@ export default function BasePaint() {
   });
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: Failed to fetch BasePaint</div>;
+  if (error || !data) return <div>Error: Failed to fetch BasePaint</div>;
 
   const theme = data.attributes.filter((x: { trait_type: string }) => {
     return x.trait_type === "Theme";

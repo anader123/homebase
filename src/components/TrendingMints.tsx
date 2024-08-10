@@ -12,7 +12,7 @@ export default function TrendingMints() {
   });
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: Failed to fetch Trending Mints</div>;
+  if (error || !data) return <div>Error: Failed to fetch Trending Mints</div>;
 
   return (
     <main className="flex flex-col w-full items-center p-6 bg-darkgray rounded-md mt-6 sm:mt-0">

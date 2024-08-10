@@ -20,7 +20,7 @@ export default function Moshicam() {
   });
 
   if (isLoading) return <></>;
-  if (error) return <div>Error: Failed to fetch Moshicam</div>;
+  if (error || !data) return <div>Error: Failed to fetch Moshicam</div>;
 
   return (
     <main className="flex flex-col bg-darkgray p-6 rounded-md gap-2">
