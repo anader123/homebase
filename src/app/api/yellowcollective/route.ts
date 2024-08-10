@@ -96,7 +96,7 @@ async function getDefaultResponse() {
         aspectRatio: "1:1",
       },
       input: {
-        text: "Enter ETH bid, must be 10% or more than the current bid",
+        text: "Enter ETH bid, min 10% above",
       },
       postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
     })
