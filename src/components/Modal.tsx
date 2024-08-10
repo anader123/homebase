@@ -91,6 +91,9 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
     };
   }, [isOpen]);
 
+  const roundedValue =
+    Math.ceil(parseFloat(details.highestEthBid!) * 1.1 * 10000) / 10000;
+
   return (
     <Transition show={isOpen}>
       <div
@@ -133,16 +136,11 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
                   <div className="flex flex-col gap-2">
                     <input
                       type="number"
-                      className="text-white w-full rounded-sm mt-4 border border-white bg-black p-1"
+                      className="text-white text-sm w-full rounded-sm mt-4 border border-white bg-black p-1"
                       value={howMuch}
-                      placeholder={`Ξ ${
-                        parseFloat(details.highestEthBid!) * 1.1
-                      } ETH or more`}
+                      placeholder={`Ξ ${roundedValue} ETH or more`}
                       onChange={handleInputChange}
                     />
-                    <span className="text-sm text-gray-400">
-                      Highest Bid: {details.highestEthBid} ETH
-                    </span>
                   </div>
                 )}
                 {write.isSuccess && (
@@ -192,12 +190,12 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, details }) => {
                 {(notEnoughBalance || write.error || !isBidValid) && (
                   <div
                     title={write.error ? write.error.message : undefined}
-                    className="text-red-500 font-roboto text-xs max-w-sm line-clamp-2"
+                    className="text-red-500 font-roboto text-xs max-w-sm line-clamp-2 mt-1"
                   >
                     {notEnoughBalance &&
-                      `Not enough ETH in your wallet. Balance: ${
-                        ethBalance?.data?.decimals ?? BigInt(0)
-                      } ETH`}
+                      `Not enough ETH in your wallet. Balance: ${Number(
+                        formatEther(BigInt(ethBalance?.data?.value ?? 0))
+                      ).toFixed(4)} ETH`}
                     {!isBidValid && "Your bid must be higher by 10%"}
                     {write.error &&
                       !notEnoughBalance &&

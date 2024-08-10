@@ -52,7 +52,8 @@ export default function YellowCollective() {
             onClose={closeModal}
             details={{
               name: data.name,
-              image: data.image,
+              image:
+                "https://www.frames.paperclip.xyz/nounish-auction/v2/nouns-builder/yellow-collective/image",
               tokenId: data.tokenId.toString(),
               abi: ABIS.yellowcollectiveAuction,
               writeAddress: CONTRACT_ADDRESSES.yellowcollectiveAuction,
