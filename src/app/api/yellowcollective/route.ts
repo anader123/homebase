@@ -30,25 +30,33 @@ export async function POST(req: NextRequest): Promise<Response> {
   }
 
   const searchParams = req.nextUrl.searchParams;
-  const isMint = searchParams.get("mint");
+  const isBid = searchParams.get("bid");
 
-  if (isMint === "true") {
-    return getMintResponse(message);
+  if (isBid === "true") {
+    const tokenId = Number(searchParams.get("tokenId"));
+    const currentBid = Number(searchParams.get("currentBid"));
+    return getBidResponse(message, tokenId, currentBid);
   } else {
     return getDefaultResponse();
   }
 }
 
-async function getMintResponse(
-  message: FrameValidationData
+async function getBidResponse(
+  message: FrameValidationData,
+  tokenId: number,
+  currentBid: number
 ): Promise<NextResponse> {
   const data = encodeFunctionData({
     abi: ABIS.yellowcollectiveAuction,
     functionName: "createBid",
-    args: [],
+    args: [tokenId],
   });
 
-  const bid = message.input || "0";
+  const bid = message.input;
+
+  if (isNaN(Number(bid)) || Number(bid) * 1.1 < currentBid) {
+    return new NextResponse(`Invalid Bid Amount: ${bid}`, { status: 500 });
+  }
 
   const txData: FrameTransactionResponse = {
     chainId: `eip155:${base.id}`,
@@ -80,8 +88,8 @@ async function getDefaultResponse() {
         },
         {
           action: "tx",
-          label: `Bid Noun #${data.tokenId}`,
-          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/yellowcollective?mint=true`,
+          label: `Bid on Noun #${data.tokenId}`,
+          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/yellowcollective?bid=true&tokenId=${data.tokenId}&currentBid=${data.highestEthBid}`,
           postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx-success`,
         },
       ],
@@ -89,7 +97,9 @@ async function getDefaultResponse() {
         src: `${data.image}`,
         aspectRatio: "1:1",
       },
-      input: { text: `Bid ${Number(data.highestEthBid) * 1.1} ETH or more` },
+      input: {
+        text: `Must bid ${Number(data.highestEthBid) * 1.1} ETH or more`,
+      },
       postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
     })
   );
