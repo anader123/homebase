@@ -2,6 +2,7 @@
 import { apiFetcher } from "@/utils/fetchers";
 import { useQuery } from "@tanstack/react-query";
 import { STALE_TIME } from "@/constants/constants";
+import ErrorMessage from "./ErrorMessage";
 
 export default function NetworkStats() {
   const { data, error, isLoading } = useQuery({
@@ -19,7 +20,7 @@ export default function NetworkStats() {
   );
 
   if (isLoading) return <></>;
-  if (error || !data) return <div>Error: Failed to fetch NetworkStats</div>;
+  if (error || !data) return <ErrorMessage name={"Base Stats"} />;
 
   return (
     <main className="hidden sm:flex flex-row items-center justify-between w-full mt-6">

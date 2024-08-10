@@ -3,6 +3,7 @@ import { apiFetcher } from "@/utils/fetchers";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { STALE_TIME } from "@/constants/constants";
+import ErrorMessage from "./ErrorMessage";
 
 export default function TopBounties() {
   const { data, error, isLoading } = useQuery({
@@ -12,7 +13,7 @@ export default function TopBounties() {
   });
 
   if (isLoading) return <></>;
-  if (error || !data) return <div>Error: Failed to fetch Bounties</div>;
+  if (error || !data) return <ErrorMessage name={"Bounty Caster"} />;
 
   return (
     <main className="w-full p-6 bg-darkgray rounded-md">

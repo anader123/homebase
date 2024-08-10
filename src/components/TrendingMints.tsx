@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { apiFetcher } from "@/utils/fetchers";
 import { STALE_TIME } from "@/constants/constants";
+import ErrorMessage from "./ErrorMessage";
 
 export default function TrendingMints() {
   const { data, error, isLoading } = useQuery({
@@ -11,8 +12,8 @@ export default function TrendingMints() {
     staleTime: STALE_TIME,
   });
 
-  if (isLoading) return <></>;
-  if (error) return <div>Error: Failed to fetch Trending Mints</div>;
+  if (isLoading) return <div className="w-full"></div>;
+  if (error || !data) return <ErrorMessage name={"Trending Mints"} />;
 
   return (
     <main className="flex flex-col w-full items-center p-6 bg-darkgray rounded-md mt-6 sm:mt-0">

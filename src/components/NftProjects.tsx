@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { apiFetcher } from "@/utils/fetchers";
 import { STALE_TIME } from "@/constants/constants";
+import ErrorMessage from "./ErrorMessage";
 
 export default function NftProjects() {
   const { data, error, isLoading } = useQuery({
@@ -12,7 +13,7 @@ export default function NftProjects() {
   });
 
   if (isLoading) return <></>;
-  if (error || !data) return <div>Error: NFT Projects</div>;
+  if (error || !data) return <ErrorMessage name={"NFT Projects"} />;
 
   return (
     <main className="flex flex-col items-center justify-between p-6 rounded-md bg-darkgray w-full">

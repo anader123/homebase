@@ -6,6 +6,7 @@ import { ABIS, CONTRACT_ADDRESSES, STALE_TIME } from "@/constants/constants";
 import { useState } from "react";
 import { Modal } from "./Modal";
 import { BUTTON_CLASS } from "@/constants/constants";
+import ErrorMessage from "./ErrorMessage";
 
 export default function YellowCollective() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -20,8 +21,7 @@ export default function YellowCollective() {
   });
 
   if (isLoading) return <></>;
-  if (error || !data)
-    return <div>Error: Failed to fetch Yellow Collective</div>;
+  if (error || !data) return <ErrorMessage name={"Yellow Collective"} />;
 
   return (
     <main className="flex flex-col bg-darkgray rounded-md">

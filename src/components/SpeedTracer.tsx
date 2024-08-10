@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { apiFetcher } from "@/utils/fetchers";
 import { STALE_TIME } from "@/constants/constants";
+import ErrorMessage from "./ErrorMessage";
 
 export default function SpeedTracer() {
   const { data, error, isLoading } = useQuery({
@@ -12,8 +13,7 @@ export default function SpeedTracer() {
   });
 
   if (isLoading) return <div className="w-full"></div>;
-  if (error || !data)
-    return <div className="w-full">Error: Failed to fetch SpeedTracer</div>;
+  if (error || !data) return <ErrorMessage name={"SpeedTracer"} />;
 
   return (
     <main className="flex flex-col bg-darkgray p-6 rounded-md gap-4">

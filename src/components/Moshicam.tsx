@@ -20,7 +20,12 @@ export default function Moshicam() {
   });
 
   if (isLoading) return <></>;
-  if (error || !data) return <div>Error: Failed to fetch Moshicam</div>;
+  if (error || !data)
+    return (
+      <div className="w-full bg-darkgray p-6 rounded-md flex justify-center items-center h-full border-2 border-gray-700">
+        <span className="mt-2">Error: Failed to fetch SpeedTracer</span>
+      </div>
+    );
 
   return (
     <main className="flex flex-col bg-darkgray p-6 rounded-md gap-2">
