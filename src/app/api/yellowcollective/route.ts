@@ -20,26 +20,22 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
-  try {
-    const frameRequest: FrameRequest = await req.json();
-    const { isValid, message } = await getFrameMessage(frameRequest);
+  const frameRequest: FrameRequest = await req.json();
+  const { isValid, message } = await getFrameMessage(frameRequest);
 
-    if (!isValid) {
-      return new NextResponse("Message not valid", { status: 500 });
-    }
+  if (!isValid) {
+    return new NextResponse("Message not valid", { status: 500 });
+  }
 
-    const searchParams = req.nextUrl.searchParams;
-    const isBid = searchParams.get("bid");
+  const searchParams = req.nextUrl.searchParams;
+  const isBid = searchParams.get("bid");
 
-    if (isBid === "true") {
-      const tokenId = Number(searchParams.get("tokenId"));
-      const currentBid = Number(searchParams.get("currentBid"));
-      return await getBidResponse(message, tokenId, currentBid);
-    } else {
-      return await getDefaultResponse();
-    }
-  } catch (error) {
-    return new NextResponse("Internal Server Error", { status: 500 });
+  if (isBid === "true") {
+    const tokenId = Number(searchParams.get("tokenId"));
+    const currentBid = Number(searchParams.get("currentBid"));
+    return await getBidResponse(message, tokenId, currentBid);
+  } else {
+    return await getDefaultResponse();
   }
 }
 
