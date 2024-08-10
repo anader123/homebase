@@ -95,9 +95,9 @@ async function getDefaultResponse() {
         src: `${data.image}`,
         aspectRatio: "1:1",
       },
-      // input: {
-      //   text: `Must bid ${Number(data.highestEthBid) * 1.1} ETH or more`,
-      // },
+      input: {
+        text: `Must bid ${Number(data.highestEthBid) * 1.1} ETH or more`,
+      },
       postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
     })
   );
