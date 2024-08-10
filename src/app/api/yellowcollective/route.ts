@@ -76,11 +76,6 @@ async function getDefaultResponse() {
     return NextResponse.json({ error: data.error }, { status: data.status });
   }
 
-  // const inputText = !!data.highestEthBid
-  //   ? `Must bid ${Number(data.highestEthBid) * 1.1} ETH or more`
-  //   : "Place Bid on Noun in ETH";
-  // const safeInputText = String(inputText);
-
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
@@ -97,11 +92,11 @@ async function getDefaultResponse() {
         },
       ],
       image: {
-        src: `${data.image}`,
+        src: `https://www.frames.paperclip.xyz/nounish-auction/v2/nouns-builder/yellow-collective/image?t=${Date.now()}`,
         aspectRatio: "1:1",
       },
       input: {
-        text: "Place Bid on Noun in ETH",
+        text: "Enter ETH bid, must be 10% or more than the current bid",
       },
       postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
     })
