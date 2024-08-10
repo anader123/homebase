@@ -5,24 +5,6 @@ import {
 } from "@coinbase/onchainkit/frame";
 import { NextRequest, NextResponse } from "next/server";
 
-const fetchInternalData = async (path: string) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/${path}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch internal data");
-  }
-
-  return response.json();
-};
-
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const frameRequest: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(frameRequest);

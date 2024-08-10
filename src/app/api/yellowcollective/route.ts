@@ -35,7 +35,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const currentBid = Number(searchParams.get("currentBid"));
     return await getBidResponse(message, tokenId, currentBid);
   } else {
-    console.log("Calling Default Reponse YC");
     return await getDefaultResponse();
   }
 }
@@ -73,13 +72,11 @@ async function getBidResponse(
 async function getDefaultResponse() {
   const data = await fetchAuctionData();
 
-  console.log("Token Data in YC Post", data);
-
   if (data.error) {
     return NextResponse.json({ error: data.error }, { status: data.status });
   }
 
-  const response = new NextResponse(
+  return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
         {
@@ -87,26 +84,23 @@ async function getDefaultResponse() {
           label: "Back",
           target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
         },
-        {
-          action: "tx",
-          label: `Bid on Noun #${data.tokenId}`,
-          target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/yellowcollective?bid=true&tokenId=${data.tokenId}&currentBid=${data.highestEthBid}`,
-          postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx-success`,
-        },
+        // {
+        //   action: "tx",
+        //   label: `Bid on Noun #${data.tokenId}`,
+        //   target: `${process.env.NEXT_PUBLIC_BASE_URL}/api/yellowcollective?bid=true&tokenId=${data.tokenId}&currentBid=${data.highestEthBid}`,
+        //   postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/tx-success`,
+        // },
       ],
       image: {
         src: `${data.image}`,
         aspectRatio: "1:1",
       },
-      input: {
-        text: `Must bid ${Number(data.highestEthBid) * 1.1} ETH or more`,
-      },
+      // input: {
+      //   text: `Must bid ${Number(data.highestEthBid) * 1.1} ETH or more`,
+      // },
       postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
     })
   );
-
-  console.log("YC Post fc response", response);
-  return response;
 }
 
 async function fetchAuctionData(): Promise<any> {
