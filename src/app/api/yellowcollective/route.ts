@@ -76,10 +76,10 @@ async function getDefaultResponse() {
     return NextResponse.json({ error: data.error }, { status: data.status });
   }
 
-  const inputText = !!data.highestEthBid
-    ? `Must bid ${Number(data.highestEthBid) * 1.1} ETH or more`
-    : "Place Bid on Noun in ETH";
-  const safeInputText = String(inputText);
+  // const inputText = !!data.highestEthBid
+  //   ? `Must bid ${Number(data.highestEthBid) * 1.1} ETH or more`
+  //   : "Place Bid on Noun in ETH";
+  // const safeInputText = String(inputText);
 
   return new NextResponse(
     getFrameHtmlResponse({
@@ -101,7 +101,7 @@ async function getDefaultResponse() {
         aspectRatio: "1:1",
       },
       input: {
-        text: safeInputText,
+        text: "Place Bid on Noun in ETH",
       },
       postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
     })
