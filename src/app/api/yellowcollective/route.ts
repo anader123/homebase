@@ -11,33 +11,35 @@ import { base } from "viem/chains";
 import { encodeFunctionData, parseEther } from "viem";
 import { CONTRACT_ADDRESSES, ABIS } from "@/constants/constants";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const data = await fetchAuctionData();
-
   if (data.error) {
     return NextResponse.json({ error: data.error }, { status: data.status });
   }
-
   return NextResponse.json(data, { status: 200 });
 }
 
-export async function POST(req: NextRequest): Promise<Response> {
-  const frameRequest: FrameRequest = await req.json();
-  const { isValid, message } = await getFrameMessage(frameRequest);
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  try {
+    const frameRequest: FrameRequest = await req.json();
+    const { isValid, message } = await getFrameMessage(frameRequest);
 
-  if (!isValid) {
-    return new NextResponse("Message not valid", { status: 500 });
-  }
+    if (!isValid) {
+      return new NextResponse("Message not valid", { status: 500 });
+    }
 
-  const searchParams = req.nextUrl.searchParams;
-  const isBid = searchParams.get("bid");
+    const searchParams = req.nextUrl.searchParams;
+    const isBid = searchParams.get("bid");
 
-  if (isBid === "true") {
-    const tokenId = Number(searchParams.get("tokenId"));
-    const currentBid = Number(searchParams.get("currentBid"));
-    return getBidResponse(message, tokenId, currentBid);
-  } else {
-    return getDefaultResponse();
+    if (isBid === "true") {
+      const tokenId = Number(searchParams.get("tokenId"));
+      const currentBid = Number(searchParams.get("currentBid"));
+      return await getBidResponse(message, tokenId, currentBid);
+    } else {
+      return await getDefaultResponse();
+    }
+  } catch (error) {
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
 
@@ -55,7 +57,7 @@ async function getBidResponse(
   const bid = message.input;
 
   if (isNaN(Number(bid)) || Number(bid) * 1.1 < currentBid) {
-    return new NextResponse(`Invalid Bid Amount: ${bid}`, { status: 500 });
+    return new NextResponse(`Invalid Bid Amount: ${bid}`, { status: 400 });
   }
 
   const txData: FrameTransactionResponse = {
@@ -105,34 +107,33 @@ async function getDefaultResponse() {
   );
 }
 
-async function fetchAuctionData() {
-  const auction = await fetch(
-    "https://www.yellowcollective.xyz/api/auction/0x0aa23A7E112889C965010558803813710beCF263"
-  );
+async function fetchAuctionData(): Promise<any> {
+  try {
+    const auction = await fetch(
+      "https://www.yellowcollective.xyz/api/auction/0x0aa23A7E112889C965010558803813710beCF263"
+    );
 
-  if (!auction.ok) {
-    return { error: "Error fetching auction data", status: auction.status };
+    const auctionData = await auction.json();
+
+    const token = await fetch(
+      `https://www.yellowcollective.xyz/api/token/0x220e41499CF4d93a3629a5509410CBf9E6E0B109/${auctionData.tokenId}`
+    );
+
+    const tokenData = await token.json();
+    const ethBid = formatUnits(
+      BigInt(parseInt(auctionData.highestBid, 16)),
+      18
+    );
+
+    return {
+      tokenId: parseInt(auctionData.tokenId, 16),
+      name: `YC Noun #${parseInt(auctionData.tokenId, 16)}`,
+      image: tokenData.image,
+      highestBidder: auctionData.highestBidder,
+      highestEthBid: ethBid,
+      status: 200,
+    };
+  } catch (error) {
+    return { error: "Internal Server Error", status: 500 };
   }
-
-  const auctionData = await auction.json();
-
-  const token = await fetch(
-    `https://www.yellowcollective.xyz/api/token/0x220e41499CF4d93a3629a5509410CBf9E6E0B109/${auctionData.tokenId}`
-  );
-
-  if (!token.ok) {
-    return { error: "Error fetching token data", status: token.status };
-  }
-
-  const tokenData = await token.json();
-  const ethBid = formatUnits(BigInt(parseInt(auctionData.highestBid, 16)), 18);
-
-  return {
-    tokenId: parseInt(auctionData.tokenId, 16),
-    name: `YC Noun #${parseInt(auctionData.tokenId, 16)}`,
-    image: tokenData.image,
-    highestBidder: auctionData.highestBidder,
-    highestEthBid: ethBid,
-    status: 200,
-  };
 }

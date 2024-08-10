@@ -1,24 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { MEMECOINS } from "@/constants/constants";
 
-export async function GET(req: NextRequest) {
+export async function GET(): Promise<NextResponse> {
   const param = "based-brett,degen-base,toshi,higher,mfercoin";
-
   const encodedIds = encodeURIComponent(param);
   const url = `https://api.coingecko.com/api/v3/simple/price?ids=${encodedIds}&vs_currencies=usd&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_CG_API_KEY}&include_market_cap=true&include_24hr_change=true`;
 
   try {
-    const coins = await fetch(url);
+    const coinsResponse = await fetch(url);
 
-    if (!coins.ok) {
-      const errorDetails = await coins.text();
-      return NextResponse.json(
-        { error: "Error fetching data", details: errorDetails },
-        { status: coins.status }
-      );
-    }
-
-    const data = await coins.json();
+    const data = await coinsResponse.json();
 
     const updatedMemeCoins = MEMECOINS.map((coin) => {
       return {
@@ -32,7 +23,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(updatedMemeCoins, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { error: "Network error or other issue" },
+      { error: "Internal Server Error" },
       { status: 500 }
     );
   }

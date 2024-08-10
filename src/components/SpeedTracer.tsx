@@ -11,8 +11,9 @@ export default function SpeedTracer() {
     staleTime: STALE_TIME,
   });
 
-  if (isLoading) return <></>;
-  if (error || !data) return <div>Error: Failed to fetch SpeedTracer</div>;
+  if (isLoading) return <div className="w-full"></div>;
+  if (error || !data)
+    return <div className="w-full">Error: Failed to fetch SpeedTracer</div>;
 
   return (
     <main className="flex flex-col bg-darkgray p-6 rounded-md gap-4">

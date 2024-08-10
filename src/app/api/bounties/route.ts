@@ -1,25 +1,27 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-  const bounties = await fetch(
-    `https://www.bountycaster.xyz/api/v1/bounties/open`
-  );
+export async function GET(): Promise<NextResponse> {
+  try {
+    const bountiesResponse = await fetch(
+      `https://www.bountycaster.xyz/api/v1/bounties/open`
+    );
 
-  if (!bounties.ok) {
+    const bountiesData = await bountiesResponse.json();
+
+    const nonNullPrices = bountiesData.bounties
+      .filter(
+        (bounty: any) =>
+          bounty?.reward_summary?.usd_value != null &&
+          bounty?.reward_summary?.usd_value > 20
+      )
+      .slice(0, 6);
+
+    return NextResponse.json(nonNullPrices, { status: 200 });
+  } catch (error) {
+    console.error("Error in GET request:", error);
     return NextResponse.json(
-      { error: "Error fetching data" },
-      { status: bounties.status }
+      { error: "Internal Server Error" },
+      { status: 500 }
     );
   }
-
-  const bountiesData = await bounties.json();
-  const nonNullPrices = bountiesData.bounties
-    .filter(
-      (bounty: any) =>
-        bounty?.reward_summary?.usd_value != null &&
-        bounty?.reward_summary?.usd_value > 20
-    )
-    .slice(0, 6);
-
-  return NextResponse.json(nonNullPrices, { status: 200 });
 }

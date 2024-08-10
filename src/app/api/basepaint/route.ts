@@ -14,22 +14,22 @@ import {
 import { base } from "viem/chains";
 import { encodeFunctionData, parseEther, zeroAddress } from "viem";
 
-export async function GET(req: NextRequest) {
-  const today = calcToday(new Date(BASEPAINT_START), new Date());
+export async function GET(): Promise<NextResponse> {
+  try {
+    const today = calcToday(new Date(BASEPAINT_START), new Date());
 
-  const response = await fetch(
-    `https://basepaint.xyz/api/art/${today.toString(16)}`
-  );
+    const response = await fetch(
+      `https://basepaint.xyz/api/art/${today.toString(16)}`
+    );
 
-  if (!response.ok) {
+    const data = await response.json();
+    return NextResponse.json(data, { status: 200 });
+  } catch (error) {
     return NextResponse.json(
-      { error: "Error fetching data" },
-      { status: response.status }
+      { error: "Internal Server Error" },
+      { status: 500 }
     );
   }
-
-  const data = await response.json();
-  return NextResponse.json(data, { status: 200 });
 }
 
 export async function POST(req: NextRequest): Promise<Response> {

@@ -10,8 +10,13 @@ import { encodeFunctionData, parseEther } from "viem";
 import { ABIS } from "@/constants/constants";
 import { base } from "viem/chains";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const data = await fetchLatestMoshi();
+
+  if (data.error) {
+    return NextResponse.json({ error: data.error }, { status: data.status });
+  }
+
   const randomIndex = Math.floor(Math.random() * 20);
   const randomMint = data.tokens[randomIndex];
 
@@ -41,17 +46,18 @@ export async function POST(req: NextRequest): Promise<Response> {
   }
 }
 
-async function fetchLatestMoshi() {
-  const response = await fetch(
-    `https://api.moshi.cam/api/v1/feed/latest-mints?last=20`
-  );
+async function fetchLatestMoshi(): Promise<any> {
+  try {
+    const response = await fetch(
+      `https://api.moshi.cam/api/v1/feed/latest-mints?last=20`
+    );
 
-  if (!response.ok) {
-    return { error: "Error fetching data", status: response.status };
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
-
-  const data = await response.json();
-  return data;
 }
 
 async function getDefaultResponse(): Promise<Response> {

@@ -1,19 +1,19 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-  const trending = await fetch(
-    "https://mint.fun/api/mintfun/feed/trending?range=24h&chain=8453"
-  );
+export async function GET(): Promise<NextResponse> {
+  try {
+    const trending = await fetch(
+      "https://mint.fun/api/mintfun/feed/trending?range=24h&chain=8453"
+    );
 
-  if (!trending.ok) {
+    const data = await trending.json();
+
+    const topThreeNFTs = data.collections.slice(0, 3);
+    return NextResponse.json(topThreeNFTs, { status: 200 });
+  } catch (error) {
     return NextResponse.json(
-      { error: "Error fetching data" },
-      { status: trending.status }
+      { error: "Internal Server Error" },
+      { status: 500 }
     );
   }
-
-  const data = await trending.json();
-
-  const topThreeNFTs = data.collections.slice(0, 3);
-  return NextResponse.json(topThreeNFTs, { status: 200 });
 }
