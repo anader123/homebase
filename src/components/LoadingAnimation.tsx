@@ -28,7 +28,7 @@ const SkeletonCard = ({ withBorder = true }: { withBorder?: boolean }) => (
 
 const LoadingAnimation = ({ isBig }: { isBig?: boolean }) => {
   return isBig ? (
-    <div className="w-full h-full bg-darkgray p-6 rounded-md flex flex-col mt-5 sm:mt-0 sm:flex-row justify-around border-2 border-gray-700 gap-6 sm:gap-12">
+    <div className="w-full h-full bg-darkgray p-6 rounded-md flex flex-col mt-2 sm:mt-0 sm:flex-row justify-around border-2 border-gray-700 gap-6 sm:gap-12">
       <SkeletonCard withBorder={false} />
       <SkeletonCard withBorder={false} />
       <SkeletonCard withBorder={false} />

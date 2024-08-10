@@ -19,7 +19,7 @@ export default function NetworkStats() {
     2
   );
 
-  if (isLoading) return <div className="w-full min-h-[50px]"></div>;
+  if (isLoading) return <div className="w-full min-h-[80px]"></div>;
   if (error || !data) return <ErrorMessage name={"Base Stats"} />;
 
   return (
