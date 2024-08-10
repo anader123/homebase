@@ -35,6 +35,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const currentBid = Number(searchParams.get("currentBid"));
     return await getBidResponse(message, tokenId, currentBid);
   } else {
+    console.log("Calling Default Reponse YC");
     return await getDefaultResponse();
   }
 }
@@ -72,11 +73,13 @@ async function getBidResponse(
 async function getDefaultResponse() {
   const data = await fetchAuctionData();
 
+  console.log("Token Data in YC Post", data);
+
   if (data.error) {
     return NextResponse.json({ error: data.error }, { status: data.status });
   }
 
-  return new NextResponse(
+  const response = new NextResponse(
     getFrameHtmlResponse({
       buttons: [
         {
@@ -101,6 +104,9 @@ async function getDefaultResponse() {
       postUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/frame`,
     })
   );
+
+  console.log("YC Post fc response", response);
+  return response;
 }
 
 async function fetchAuctionData(): Promise<any> {
