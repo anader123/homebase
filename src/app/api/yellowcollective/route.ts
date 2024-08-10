@@ -92,7 +92,7 @@ async function getDefaultResponse() {
         },
       ],
       image: {
-        src: `https://www.frames.paperclip.xyz/nounish-auction/v2/nouns-builder/yellow-collective/image?t=${Date.now()}`,
+        src: `https://www.frames.paperclip.xyz/nounish-auction/v2/nouns-builder/yellow-collective/image`,
         aspectRatio: "1:1",
       },
       input: {
