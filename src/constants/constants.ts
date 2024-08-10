@@ -11,7 +11,7 @@ export const CONTRACT_ADDRESSES: Record<string, `0x${string}`> = {
   speedtracer: "0xaa4d3bc0fc9b7e2e6253ed83efb5dce9a21ae1c9",
   basepaint: "0xba5e05cb26b78eda3a2f8e3b3814726305dcac83",
   basepaintRewards: "0xaff1A9E200000061fC3283455d8B0C7e3e728161",
-  yellowcollectiveAuction: "0xf958872ceb73ba7d0aca0c7a9905119bcb371dec",
+  yellowcollectiveAuction: "0x0aa23a7e112889c965010558803813710becf263",
 };
 
 export const STALE_TIME = 1000 * 60 * 10; // 10 mins
