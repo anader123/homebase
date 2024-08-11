@@ -11,13 +11,12 @@ export default function NetworkStats() {
     staleTime: STALE_TIME,
   });
 
-  const formattedTvl = (parseFloat(data?.tvlUsd) / 1e9).toFixed(2);
-  const formattedTotalTxs = (parseFloat(data?.totalTransactions) / 1e6).toFixed(
-    0
-  );
-  const formattedDailyTxs = (parseFloat(data?.dailyTransactions) / 1e6).toFixed(
-    2
-  );
+  console.log(data);
+
+  const formattedTvl = (parseFloat(data?.tvlUsd ?? 6.1e6) / 1e9).toFixed(2);
+  const formattedTotalTxs = (
+    parseFloat(data?.totalTransactions ?? 500e6) / 1e6
+  ).toFixed(0);
 
   if (isLoading) return <div className="w-full min-h-[80px]"></div>;
   if (error || !data) return <ErrorMessage name={"Base Stats"} />;
@@ -36,7 +35,6 @@ export default function NetworkStats() {
         <p className="text-gray-400">Total Transactions</p>
         <p className="sm:text-2xl">{formattedTotalTxs} Million 📈</p>
       </div>
-      {/* <p>Transactions Today: {formattedDailyTxs} Mil</p> */}
     </main>
   );
 }

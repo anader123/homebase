@@ -4,7 +4,7 @@ export async function GET(): Promise<NextResponse> {
   try {
     const baseTvlResponse = await fetch(`https://l2beat.com/api/tvl/base.json`);
     const baseStatsResponse = await fetch(
-      `https://base.blockscout.com/api/v2/stats`
+      `https://base.blockscout.com/api/v2/stats?apikey=${process.env.BLOCKSCOUT_API_KEY}`
     );
 
     const baseTvlData = await baseTvlResponse.json();

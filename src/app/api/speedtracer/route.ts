@@ -18,7 +18,7 @@ export async function GET() {
     const tokenUrl = `https://api-base.reservoir.tools/tokens/v7?tokens=${CONTRACT_ADDRESSES.speedtracer}:${today}`;
     const tokenResponse = await fetch(tokenUrl, {
       headers: {
-        "x-api-key": process.env.NEXT_PUBLIC_RESERVOIR_API_KEY!,
+        "x-api-key": process.env.RESERVOIR_API_KEY!,
       },
     });
 
@@ -33,7 +33,7 @@ export async function GET() {
       }:${today - 1}`;
       const tokenFallback = await fetch(tokenUrl, {
         headers: {
-          "x-api-key": process.env.NEXT_PUBLIC_RESERVOIR_API_KEY!,
+          "x-api-key": process.env.RESERVOIR_API_KEY!,
         },
       });
 

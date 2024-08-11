@@ -4,7 +4,7 @@ import { MEMECOINS } from "@/constants/constants";
 export async function GET(): Promise<NextResponse> {
   const param = "based-brett,degen-base,toshi,higher,mfercoin";
   const encodedIds = encodeURIComponent(param);
-  const url = `https://api.coingecko.com/api/v3/simple/price?ids=${encodedIds}&vs_currencies=usd&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_CG_API_KEY}&include_market_cap=true&include_24hr_change=true`;
+  const url = `https://api.coingecko.com/api/v3/simple/price?ids=${encodedIds}&vs_currencies=usd&x_cg_demo_api_key=${process.env.CG_API_KEY}&include_market_cap=true&include_24hr_change=true`;
 
   try {
     const coinsResponse = await fetch(url);

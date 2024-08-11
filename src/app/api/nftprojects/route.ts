@@ -9,7 +9,7 @@ export async function GET(): Promise<NextResponse> {
   try {
     const response = await fetch(url, {
       headers: {
-        "x-api-key": process.env.NEXT_PUBLIC_RESERVOIR_API_KEY!,
+        "x-api-key": process.env.RESERVOIR_API_KEY!,
       },
     });
 
