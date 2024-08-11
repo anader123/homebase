@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { apiFetcher } from "@/utils/fetchers";
 import { STALE_TIME } from "@/constants/constants";
+import LoadingAnimation from "./LoadingAnimation";
 import ErrorMessage from "./ErrorMessage";
 
 export default function MemeCoins() {
@@ -12,7 +13,7 @@ export default function MemeCoins() {
     staleTime: STALE_TIME,
   });
 
-  if (isLoading) return <></>;
+  if (isLoading) return <LoadingAnimation />;
   if (error || !data) return <ErrorMessage name={"Memecoins"} />;
 
   return (

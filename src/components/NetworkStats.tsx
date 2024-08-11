@@ -11,8 +11,6 @@ export default function NetworkStats() {
     staleTime: STALE_TIME,
   });
 
-  console.log(data);
-
   const formattedTvl = (parseFloat(data?.tvlUsd ?? 6.1e6) / 1e9).toFixed(2);
   const formattedTotalTxs = (
     parseFloat(data?.totalTransactions ?? 500e6) / 1e6
