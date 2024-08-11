@@ -71,8 +71,8 @@ export default function Home() {
             <MemeCoins />
             <NftProjects />
           </div>
-          <div className="w-full grid grid-cols-1 sm:grid-cols-4 sm:gap-x-6 gap-y-6 sm:gap-y-0">
-            <SpeedTracer />
+          <div className="w-full grid grid-cols-1 sm:grid-cols-3 sm:gap-x-6 gap-y-6 sm:gap-y-0">
+            {/* <SpeedTracer /> */}
             <BasePaint />
             <YellowCollective />
             <Moshicam />
