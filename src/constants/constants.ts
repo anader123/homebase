@@ -125,30 +125,35 @@ export const NFT_PROJECTS = [
   {
     name: "Onchain Gaias",
     address: "",
+    osName: "onchain-gaias",
     image:
       "https://i.seadn.io/s/raw/files/0051dce5929fe4f195bf98bb20ea7aa0.jpg?auto=format&dpr=1&w=64",
   },
   {
     name: "Base Gods",
     address: "",
+    osName: "basegods125",
     image:
       "https://i.seadn.io/s/raw/files/5a0d8b395d0288ad816e302ecce9f3cd.gif?auto=format&dpr=1&w=64",
   },
   {
     name: "Based Punks",
     address: "",
+    osName: "basedpunks",
     image:
       "https://i.seadn.io/s/raw/files/857e39e54f4fa53eb78d1747e9470478.png?auto=format&dpr=1&w=64",
   },
   {
     name: "BasePaint",
     address: "",
+    osName: "basepaint",
     image:
       "https://i.seadn.io/gcs/files/bb9ca4cd26ea64203f696f42bcdf4bec.png?auto=format&dpr=1&w=64",
   },
   {
     name: "swatches by jvmi",
     address: "",
+    osName: "swatches-by-jvmi",
     image:
       "https://i.seadn.io/s/raw/files/7de0794e14fbf7af9c135a9a52452500.gif?auto=format&dpr=1&w=64",
   },

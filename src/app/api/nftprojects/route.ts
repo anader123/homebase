@@ -31,6 +31,7 @@ export async function GET(): Promise<NextResponse> {
           floorAskPrice: collection.floorAsk?.price?.amount?.decimal || 0,
           image: matchingProjects.length > 0 ? matchingProjects[0].image : "",
           weeklyChange: collection.floorSaleChange?.["7day"] || 0,
+          osName: matchingProjects.length > 0 ? matchingProjects[0].osName : "",
         };
       });
 

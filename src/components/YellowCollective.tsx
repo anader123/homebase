@@ -27,23 +27,24 @@ export default function YellowCollective() {
   return (
     <main className="flex flex-col bg-darkgray rounded-md">
       <div className="flex flex-col items-start justify-between w-full p-6 flex-grow">
-        <h2 className="text-xl">Yellow Collective</h2>
-        <Image
-          src={`${data.image}`}
-          alt={data.name}
-          layout="responsive"
-          width={400}
-          height={400}
-          className="rounded-lg p-1 bg-gray-800 border border-gray-700"
-        />
-
-        <div className="w-full">
-          <div>
-            <p>{data.name}</p>
-            <p className="text-sm text-gray-400">
-              Highest Bid: {data.highestEthBid} ETH
-            </p>
-          </div>
+        <div>
+          <h2 className="text-xl mb-4">Yellow Collective</h2>
+          <Image
+            src={data.image}
+            alt={data.name}
+            layout="responsive"
+            width={400}
+            height={400}
+            className="rounded-lg p-1 bg-gray-800 border border-gray-700"
+          />
+        </div>
+        <div>
+          <p>Day #{data.tokenId}</p>
+          <p className="text-sm text-gray-400">
+            Highest Bid: {data.highestEthBid} ETH
+          </p>
+        </div>
+        <div className="w-full sm:mt-4">
           <button onClick={() => openModal()} className={BUTTON_CLASS}>
             Bid
           </button>

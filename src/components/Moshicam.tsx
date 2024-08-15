@@ -30,7 +30,7 @@ export default function Moshicam() {
         <img
           src={data.previews.image_medium_url}
           alt={data.contract_address}
-          className="rounded-md bg-gray-800 border border-gray-700"
+          className="rounded-md bg-gray-800 border border-gray-700 w-full"
         />
       </div>
       <div className="mt-2">

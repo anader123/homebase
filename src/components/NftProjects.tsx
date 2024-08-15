@@ -47,7 +47,14 @@ export default function NftProjects() {
                       height={30}
                       className="rounded-full inline-block mr-2"
                     />
-                    <span>{collection.name}</span>
+                    <a
+                      className="hover:underline hover:opacity-70"
+                      href={`https://opensea.io/collection/${collection.osName}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {collection.name}
+                    </a>
                   </div>
                 </td>
                 <td className="p-2 text-center">

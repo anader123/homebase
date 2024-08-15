@@ -44,7 +44,14 @@ export default function MemeCoins() {
                     height={30}
                     className="rounded-full inline-block mr-2"
                   />
-                  <span>{coin.name}</span>
+                  <a
+                    className="hover:underline hover:opacity-70"
+                    href={`https://www.coingecko.com/en/coins/${coin.coingeckoName}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {coin.name}
+                  </a>
                 </td>
                 <td className="p-2 text-center">
                   ${coin.priceData.usd.toFixed(4)}
